@@ -1,5 +1,5 @@
 {
-  "name": "horpax",
+  "name": "function-overloader",
   "version": "1.0.0",
   "description": "improve overloading functions and methods in js",
   "main": "dist/index.js",
