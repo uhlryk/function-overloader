@@ -38,7 +38,7 @@ class Monster {
             })
             .when()
             .do(() => {
-                throw Error("Wrong attributes);
+                throw Error("Wrong attributes");
             })
             .done();
         console.log(`Monster ${this.name}` level ${this.level} created`);
@@ -52,7 +52,7 @@ class Monster {
             .do(this.addNewAttribute)
             .when()
             .do(() => {
-                throw Error("Wrong attributes);
+                throw Error("Wrong attributes");
             })
             .done();
     }
@@ -138,7 +138,7 @@ Another possibility is to :
 ```javascript
 new Overload(...arguments);
 ```
-And it will also return `Condition Object`
+And it will also return `Condition Response`
 
 ### Condition Response
 
@@ -165,7 +165,7 @@ Has one method
 ```
 
 Accept function which should be called if previous `.when` match arguments.
-Will respond with `Condition Object`
+Will respond with `Condition Response`
 
 ## License
 
