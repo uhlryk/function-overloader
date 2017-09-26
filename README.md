@@ -41,7 +41,7 @@ class Monster {
                 throw Error("Wrong attributes");
             })
             .done();
-        console.log(`Monster ${this.name}` level ${this.level} created`);
+        console.log(`Monster ${this.name} level ${this.level} created`);
     }
     
     addAttribute() {
