@@ -22,18 +22,23 @@ export default class Overload {
    * @returns {{then}|*}
    */
     when() {
-        let checkCondition = Array.from(arguments).every((arg, index) => {
-            switch (typeof arg) {
-                // means that this is expected typeof argument
-                case "string":
-                    return typeof this._args[index] === arg;
-                // means that this is function which positive result means that this is expected argument
-                case "function":
-                    return this._args[index] instanceof arg;
-                default:
-                    throw TypeError("Wrong arguments", arg);
-            }
-        });
+        let checkCondition = false;
+        if (arguments.length === 0 && this._args.length === 0) {
+            checkCondition = true;
+        } else if (arguments.length === this._args.length) {
+            checkCondition = Array.from(arguments).every((arg, index) => {
+                switch (typeof arg) {
+                    // means that this is expected typeof argument
+                    case "string":
+                        return typeof this._args[index] === arg;
+                    // means that this is function which positive result means that this is expected argument
+                    case "function":
+                        return this._args[index] instanceof arg;
+                    default:
+                        throw TypeError("Wrong arguments", arg);
+                }
+            });
+        }
         return {
             do: callback => {
                 if (checkCondition && this._enabled) {

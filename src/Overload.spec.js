@@ -11,11 +11,35 @@ describe("Helper overload", () => {
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
+    });
 
-        result = Overload.set(undefined, 12345)
+    it("return correct response when expected undefined as argument", () => {
+        let result = Overload.set(undefined, 12345)
             .when("number", "string")
             .do(() => "wrong result")
             .when("undefined", "number")
+            .do(() => "correct result")
+            .when("number", "object")
+            .do(() => "wrong result")
+            .done();
+        expect(result).to.be.equal("correct result");
+    });
+
+    it("return correct response when expected no arguments", () => {
+        let result = Overload.set()
+            .when("number", "string")
+            .do(() => "wrong result")
+            .when()
+            .do(() => "correct result")
+            .when("number", "object")
+            .do(() => "wrong result")
+            .done();
+        expect(result).to.be.equal("correct result");
+
+        result = Overload.set()
+            .when("undefined", "undefined")
+            .do(() => "wrong resultAA")
+            .when()
             .do(() => "correct result")
             .when("number", "object")
             .do(() => "wrong result")

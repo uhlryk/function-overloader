@@ -36,10 +36,6 @@ class Monster {
                 this.name = monsterData.name;
                 this.level = monsterData.level;
             })
-            .when()
-            .do(() => {
-                throw Error("Wrong attributes");
-            })
             .done();
         console.log(`Monster ${this.name} level ${this.level} created`);
     }
@@ -50,10 +46,6 @@ class Monster {
             .do(this.addExisitingAttribute)
             .when("string", "function")
             .do(this.addNewAttribute)
-            .when()
-            .do(() => {
-                throw Error("Wrong attributes");
-            })
             .done();
     }
     
@@ -162,6 +154,8 @@ Possible values:
  * **"undefined"**
  * **Constructor function / class** to define that argument should be an instance of provided class / constructor.
  
+ 
+if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
 ```javascript
 .done()
 ```
@@ -169,7 +163,7 @@ should be called at the end to mark that now we should get chosen function respo
  
 No arguments. Will return funtion response
 
-### Function Respons
+### Function Response
 
 Has one method 
 ```javascript
