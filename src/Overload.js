@@ -1,3 +1,4 @@
+import debug from "debug";
 /**
  * Class representing helper for methods for simplify overloading
  */
@@ -9,7 +10,9 @@ export default class Overload {
    * @param {any} args any arguments which overloaded function get
    */
     constructor() {
+        this._debug = debug("overloader");
         this._args = Array.from(arguments);
+        this._debug("constructor get arguments ", this._args);
         this._enabled = true;
         this._result = null;
     }
@@ -22,6 +25,7 @@ export default class Overload {
    * @returns {{then}|*}
    */
     when() {
+        this._debug("when", Array.from(arguments));
         let checkCondition = false;
         if (arguments.length === 0 && this._args.length === 0) {
             checkCondition = true;
@@ -39,11 +43,17 @@ export default class Overload {
                 }
             });
         }
+        this._debug("result", checkCondition);
         return {
             do: callback => {
+                this._debug("do");
                 if (checkCondition && this._enabled) {
+                    this._debug("execute function");
                     this._enabled = false;
-                    this._result = callback(...this._args);
+                    let result = callback(...this._args);
+                    this._debug("function sync result", result);
+                    this._result = result;
+
                 }
                 return this;
             }
