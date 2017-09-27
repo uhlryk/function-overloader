@@ -148,8 +148,20 @@ It has methods:
 .when()
 ```
 
-Which accept description of arguments and return `Function Response`
+It is for describe when to run related `do` method.
+Return `Function Response`
 
+Accept multiple values that will descibe function.
+Possible values:
+
+ * **"boolean"** 
+ * **"number"**
+ * **"string"**
+ * **"symbol"**
+ * **"function"**
+ * **"undefined"**
+ * **Constructor function / class** to define that argument should be an instance of provided class / constructor.
+ 
 ```javascript
 .done()
 ```
