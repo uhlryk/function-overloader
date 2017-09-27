@@ -173,7 +173,7 @@ Has one method
 Accept function which should be called if previous `.when` match arguments.
 Will respond with `Condition Response`
 
- ## Debugger
+## Debugger
 
 For easy debug this library run your script with
 
