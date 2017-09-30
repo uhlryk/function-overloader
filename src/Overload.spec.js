@@ -1,4 +1,4 @@
-import Overload from "./Overload";
+import Overload, * as TYPES from "./Overload";
 
 describe("Helper overload", () => {
     it("return sync result for typeof tests", () => {
@@ -11,6 +11,50 @@ describe("Helper overload", () => {
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
+    });
+
+    it("resolved to correct types", () => {
+        let result = Overload.set("someString")
+            .when(TYPES.STRING)
+            .do(() => "correct string")
+            .done();
+        expect(result).to.be.equal("correct string");
+
+        result = Overload.set(1234)
+            .when(TYPES.NUMBER)
+            .do(() => "correct number")
+            .done();
+        expect(result).to.be.equal("correct number");
+
+        result = Overload.set(true)
+            .when(TYPES.BOOLEAN)
+            .do(() => "correct bool")
+            .done();
+        expect(result).to.be.equal("correct bool");
+
+        result = Overload.set(() => {})
+            .when(TYPES.FUNCTION)
+            .do(() => "correct function")
+            .done();
+        expect(result).to.be.equal("correct function");
+
+        result = Overload.set({})
+            .when(TYPES.OBJECT)
+            .do(() => "correct object")
+            .done();
+        expect(result).to.be.equal("correct object");
+
+        result = Overload.set(Symbol("test"))
+            .when(TYPES.SYMBOL)
+            .do(() => "correct symbol")
+            .done();
+        expect(result).to.be.equal("correct symbol");
+
+        result = Overload.set(undefined)
+            .when(TYPES.UNDEFINED)
+            .do(() => "correct undefined")
+            .done();
+        expect(result).to.be.equal("correct undefined");
     });
 
     it("return correct response when expected undefined as argument", () => {

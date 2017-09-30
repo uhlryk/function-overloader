@@ -1,5 +1,13 @@
 import debug from "debug";
 
+export const STRING = "string";
+export const NUMBER = "number";
+export const OBJECT = "object";
+export const FUNCTION = "function";
+export const BOOLEAN = "boolean";
+export const SYMBOL = "symbol";
+export const UNDEFINED = "undefined";
+
 export default class Overload {
     static set() {
         return new Overload(...arguments);

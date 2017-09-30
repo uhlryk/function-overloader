@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-polyfill"));
+		module.exports = factory(require("babel-polyfill"), require("debug"));
 	else if(typeof define === 'function' && define.amd)
-		define(["babel-polyfill"], factory);
+		define(["babel-polyfill", "debug"], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("babel-polyfill")) : factory(root["babel-polyfill"]);
+		var a = typeof exports === 'object' ? factory(require("babel-polyfill"), require("debug")) : factory(root["babel-polyfill"], root["debug"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_1__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_1__, __WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -117,18 +117,30 @@ exports.default = _Overload2.default;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.UNDEFINED = exports.SYMBOL = exports.BOOLEAN = exports.FUNCTION = exports.OBJECT = exports.NUMBER = exports.STRING = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _debug = __webpack_require__(4);
+
+var _debug2 = _interopRequireDefault(_debug);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-/**
- * Class representing helper for methods for simplify overloading
- */
+var STRING = exports.STRING = "string";
+var NUMBER = exports.NUMBER = "number";
+var OBJECT = exports.OBJECT = "object";
+var FUNCTION = exports.FUNCTION = "function";
+var BOOLEAN = exports.BOOLEAN = "boolean";
+var SYMBOL = exports.SYMBOL = "symbol";
+var UNDEFINED = exports.UNDEFINED = "undefined";
+
 var Overload = function () {
     _createClass(Overload, null, [{
         key: "set",
@@ -144,7 +156,9 @@ var Overload = function () {
     function Overload() {
         _classCallCheck(this, Overload);
 
+        this._debug = (0, _debug2.default)("overloader");
         this._args = Array.from(arguments);
+        this._debug("constructor get arguments ", this._args);
         this._enabled = true;
         this._result = null;
     }
@@ -163,27 +177,51 @@ var Overload = function () {
         value: function when() {
             var _this = this;
 
-            var checkCondition = Array.from(arguments).every(function (arg, index) {
-                switch (typeof arg === "undefined" ? "undefined" : _typeof(arg)) {
-                    // means that this is expected typeof argument
-                    case "string":
-                        return _typeof(_this._args[index]) === arg;
-                    // means that this is function which positive result means that this is expected argument
-                    case "function":
-                        return _this._args[index] instanceof arg;
-                    default:
-                        throw TypeError("Wrong arguments", arg);
-                }
-            });
+            this._debug("when", Array.from(arguments));
+            var checkCondition = false;
+            if (arguments.length === 0 && this._args.length === 0) {
+                checkCondition = true;
+            } else if (arguments.length === this._args.length) {
+                checkCondition = Array.from(arguments).every(function (arg, index) {
+                    switch (typeof arg === "undefined" ? "undefined" : _typeof(arg)) {
+                        // means that this is expected typeof argument
+                        case "string":
+                            return _typeof(_this._args[index]) === arg;
+                        // means that this is function which positive result means that this is expected argument
+                        case "function":
+                            return _this._args[index] instanceof arg;
+                        default:
+                            throw TypeError("Wrong arguments", arg);
+                    }
+                });
+            }
+            this._debug("result", checkCondition);
             return {
                 do: function _do(callback) {
+                    _this._debug("do");
                     if (checkCondition && _this._enabled) {
+                        _this._debug("execute function");
                         _this._enabled = false;
-                        _this._result = callback.apply(undefined, _toConsumableArray(_this._args));
+                        var result = callback.apply(undefined, _toConsumableArray(_this._args));
+                        _this._debug("function sync result", result);
+                        _this._result = result;
                     }
                     return _this;
                 }
             };
+        }
+    }, {
+        key: "else",
+        value: function _else(callback) {
+            this._debug("else");
+            if (this._enabled) {
+                this._debug("execute function");
+                this._enabled = false;
+                var result = callback.apply(undefined, _toConsumableArray(this._args));
+                this._debug("function sync result", result);
+                this._result = result;
+            }
+            return this;
         }
 
         /**
@@ -202,6 +240,12 @@ var Overload = function () {
 }();
 
 exports.default = Overload;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = require("debug");
 
 /***/ })
 /******/ ]);
