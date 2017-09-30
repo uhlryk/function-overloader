@@ -47,6 +47,19 @@ describe("Helper overload", () => {
         expect(result).to.be.equal("correct result");
     });
 
+    it("invoke else and correct response when no condition met", () => {
+        let result = Overload.set(10, 10)
+            .when("number", "string")
+            .do(() => "wrong result")
+            .when()
+            .do(() => "wrong result")
+            .when("number", "object")
+            .do(() => "wrong result")
+            .else(() => "correct result")
+            .done();
+        expect(result).to.be.equal("correct result");
+    });
+
     it("return sync result for classes", () => {
         class Test1 {}
         class Test2 {}

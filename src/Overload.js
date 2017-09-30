@@ -1,7 +1,5 @@
 import debug from "debug";
-/**
- * Class representing helper for methods for simplify overloading
- */
+
 export default class Overload {
     static set() {
         return new Overload(...arguments);
@@ -59,6 +57,20 @@ export default class Overload {
             }
         };
     }
+
+    else(callback) {
+        this._debug("else");
+        if (this._enabled) {
+            this._debug("execute function");
+            this._enabled = false;
+            let result = callback(...this._args);
+            this._debug("function sync result", result);
+            this._result = result;
+
+        }
+        return this;
+    }
+
 
     /**
    * Should be called at the end. It will return result from called use callback
