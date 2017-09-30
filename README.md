@@ -137,7 +137,7 @@ And it will also return `Condition Response`
 It has methods:
 
 ```javascript
-.when()
+<Overload Instance>.when()
 ```
 
 It is for describe when to run related `do` method.
@@ -156,8 +156,14 @@ Possible values:
  
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
+
 ```javascript
-.done()
+<Overload Instance>.else()
+```
+Accept callback function. Will invoke it when other criteria are not met.
+
+```javascript
+<Overload Instance>.done()
 ```
 should be called at the end to mark that now we should get chosen function response
  
