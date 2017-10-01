@@ -59,7 +59,6 @@ export default class Overload {
                     let result = callback(...this._args);
                     this._debug("function sync result", result);
                     this._result = result;
-
                 }
                 return this;
             }
@@ -74,11 +73,9 @@ export default class Overload {
             let result = callback(...this._args);
             this._debug("function sync result", result);
             this._result = result;
-
         }
         return this;
     }
-
 
     /**
    * Should be called at the end. It will return result from called use callback
