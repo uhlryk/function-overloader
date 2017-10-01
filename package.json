@@ -10,7 +10,7 @@
     "coverage": "istanbul cover ./node_modules/.bin/_mocha -- --require source-map-support --require babel-register --require babel-polyfill --require init.mocha.js --check-leaks --timeout 3000 'src/**/*.spec.js' && open coverage/lcov-report/index.html",
     "complexity": "plato -r --eslint .eslintrc -d report src && open report/index.html",
     "linter": "eslint src",
-    "precommit": "lint-staged && npm run linter && npm test",
+    "precommit": "lint-staged && npm run build && git add dist/ && npm run linter && npm test",
     "build": "webpack --config webpack.babel.js",
     "example": "npm run build-server && node --require babel-register example/index.js"
   },
@@ -61,7 +61,8 @@
     "webpack2-externals-plugin": "^1.0.0"
   },
   "dependencies": {
-    "debug": "^3.0.1"
+    "debug": "^3.0.1",
+    "husky": "^0.14.3"
   },
   "lint-staged": {
     "*.js": [

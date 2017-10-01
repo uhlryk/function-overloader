@@ -157,6 +157,22 @@ Possible values:
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
 
+In addition you can import `overloader` with build in types
+
+```
+import Overload, * as TYPES from "./Overload";
+```
+
+Then to define types you can:
+
+ * **TYPES.STRING**
+ * **TYPES.NUMBER**
+ * **TYPES.OBJECT**
+ * **TYPES.FUNCTION**
+ * **TYPES.BOOLEAN**
+ * **TYPES.SYMBOL**
+ * **TYPES.UNDEFINED**
+
 ```javascript
 <Overload Instance>.else()
 ```
