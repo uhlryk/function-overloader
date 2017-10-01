@@ -1,6 +1,37 @@
 import Overload, * as TYPES from "./Overload";
 
 describe("Helper overload", () => {
+    it("ensure that 'when' method return only object with 'do' method", () => {
+        let whenMethodResult = Overload.set().when();
+        expect(whenMethodResult).to.have.property("do");
+        expect(whenMethodResult).to.not.have.property("when");
+        expect(whenMethodResult).to.not.have.property("else");
+        expect(whenMethodResult).to.not.have.property("done");
+    });
+
+    it("ensure that 'do' method return object with 'when' & 'else' & 'done' methods", () => {
+        let doMethodResult = Overload.set()
+            .when()
+            .do(() => {});
+        expect(doMethodResult).to.have.property("when");
+        expect(doMethodResult).to.have.property("else");
+        expect(doMethodResult).to.have.property("done");
+        expect(doMethodResult).to.not.have.property("do");
+    });
+
+    it("ensure that 'else' method return only object with 'done' method", () => {
+        let elseMethodResult = Overload.set().else(() => {});
+        expect(elseMethodResult).to.have.property("done");
+        expect(elseMethodResult).to.not.have.property("when");
+        expect(elseMethodResult).to.not.have.property("else");
+        expect(elseMethodResult).to.not.have.property("do");
+    });
+
+    it("ensure that 'done' method return response", () => {
+        let doneMethodResult = Overload.set().done();
+        expect(doneMethodResult).to.be.null();
+    });
+
     it("return sync result for typeof tests", () => {
         let result = Overload.set("someString", 12345)
             .when("number", "string")

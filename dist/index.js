@@ -161,6 +161,10 @@ var Overload = function () {
         this._debug("constructor get arguments ", this._args);
         this._enabled = true;
         this._result = null;
+
+        this.when = this.when.bind(this);
+        this.else = this.else.bind(this);
+        this.done = this.done.bind(this);
     }
 
     /**
@@ -206,7 +210,11 @@ var Overload = function () {
                         _this._debug("function sync result", result);
                         _this._result = result;
                     }
-                    return _this;
+                    return {
+                        when: _this.when,
+                        else: _this.else,
+                        done: _this.done
+                    };
                 }
             };
         }
@@ -221,7 +229,9 @@ var Overload = function () {
                 this._debug("function sync result", result);
                 this._result = result;
             }
-            return this;
+            return {
+                done: this.done
+            };
         }
 
         /**

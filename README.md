@@ -132,16 +132,14 @@ new Overload(...arguments);
 ```
 And it will also return `Condition Response`
 
-### Condition Response
-
-It has methods:
+### .when()
 
 ```javascript
-<Overload Instance>.when()
+.when()
 ```
 
 It is for describe when to run related `do` method.
-Return `Function Response`
+Return object with `do` method
 
 Accept multiple values that will descibe function.
 Possible values:
@@ -173,26 +171,33 @@ Then to define types you can:
  * **TYPES.SYMBOL**
  * **TYPES.UNDEFINED**
 
+### .else()
+
 ```javascript
-<Overload Instance>.else()
+.else()
 ```
 Accept callback function. Will invoke it when other criteria are not met.
 
+Return object with `done` method.
+
+### .done()
+
 ```javascript
-<Overload Instance>.done()
+.done()
 ```
 should be called at the end to mark that now we should get chosen function response
  
 No arguments. Will return funtion response
 
-### Function Response
+### .do()
 
-Has one method 
+Is accessible only from object returned from `.when` method
+
 ```javascript
 .do()
 ```
 
-Accept function which should be called if previous `.when` match arguments.
+Accept callback function which should be called if previous `.when` match arguments.
 Will respond with `Condition Response`
 
 ## Debugger

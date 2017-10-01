@@ -21,6 +21,10 @@ export default class Overload {
         this._debug("constructor get arguments ", this._args);
         this._enabled = true;
         this._result = null;
+
+        this.when = this.when.bind(this);
+        this.else = this.else.bind(this);
+        this.done = this.done.bind(this);
     }
 
     /**
@@ -60,7 +64,11 @@ export default class Overload {
                     this._debug("function sync result", result);
                     this._result = result;
                 }
-                return this;
+                return {
+                    when: this.when,
+                    else: this.else,
+                    done: this.done
+                };
             }
         };
     }
@@ -74,7 +82,9 @@ export default class Overload {
             this._debug("function sync result", result);
             this._result = result;
         }
-        return this;
+        return {
+            done: this.done
+        };
     }
 
     /**
