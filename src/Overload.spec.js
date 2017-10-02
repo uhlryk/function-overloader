@@ -1,4 +1,4 @@
-import Overload, * as TYPES from "./Overload";
+import Overload from "./Overload";
 
 describe("Helper overload", () => {
     it("ensure that 'when' method return only object with 'do' method", () => {
@@ -34,11 +34,11 @@ describe("Helper overload", () => {
 
     it("return sync result for typeof tests", () => {
         let result = Overload.set("someString", 12345)
-            .when("number", "string")
+            .when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
-            .when("string", "number")
+            .when(Overload.STRING, Overload.NUMBER)
             .do(() => "correct result")
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
@@ -46,43 +46,51 @@ describe("Helper overload", () => {
 
     it("resolved to correct types", () => {
         let result = Overload.set("someString")
-            .when(TYPES.STRING)
+            .when(Overload.STRING)
             .do(() => "correct string")
             .done();
         expect(result).to.be.equal("correct string");
 
         result = Overload.set(1234)
-            .when(TYPES.NUMBER)
+            .when(Overload.NUMBER)
             .do(() => "correct number")
             .done();
         expect(result).to.be.equal("correct number");
 
         result = Overload.set(true)
-            .when(TYPES.BOOLEAN)
+            .when(Overload.BOOLEAN)
             .do(() => "correct bool")
             .done();
         expect(result).to.be.equal("correct bool");
 
         result = Overload.set(() => {})
-            .when(TYPES.FUNCTION)
+            .when(Overload.FUNCTION)
             .do(() => "correct function")
             .done();
         expect(result).to.be.equal("correct function");
 
         result = Overload.set({})
-            .when(TYPES.OBJECT)
+            .when(Overload.OBJECT)
             .do(() => "correct object")
             .done();
         expect(result).to.be.equal("correct object");
 
         result = Overload.set(Symbol("test"))
-            .when(TYPES.SYMBOL)
+            .when(Overload.SYMBOL)
             .do(() => "correct symbol")
             .done();
         expect(result).to.be.equal("correct symbol");
 
         result = Overload.set(undefined)
-            .when(TYPES.UNDEFINED)
+            .when(Overload.UNDEFINED)
+            .do(() => "correct undefined")
+            .done();
+        expect(result).to.be.equal("correct undefined");
+
+        class Test {}
+        let test = new Test();
+        result = Overload.set(test)
+            .when(Overload.INSTANCE(Test))
             .do(() => "correct undefined")
             .done();
         expect(result).to.be.equal("correct undefined");
@@ -90,11 +98,11 @@ describe("Helper overload", () => {
 
     it("return correct response when expected undefined as argument", () => {
         let result = Overload.set(undefined, 12345)
-            .when("number", "string")
+            .when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
-            .when("undefined", "number")
+            .when(Overload.UNDEFINED, Overload.NUMBER)
             .do(() => "correct result")
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
@@ -102,21 +110,21 @@ describe("Helper overload", () => {
 
     it("return correct response when expected no arguments", () => {
         let result = Overload.set()
-            .when("number", "string")
+            .when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when()
             .do(() => "correct result")
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
 
         result = Overload.set()
-            .when("undefined", "undefined")
+            .when(Overload.UNDEFINED, Overload.UNDEFINED)
             .do(() => "wrong resultAA")
             .when()
             .do(() => "correct result")
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
@@ -124,11 +132,11 @@ describe("Helper overload", () => {
 
     it("invoke else and correct response when no condition met", () => {
         let result = Overload.set(10, 10)
-            .when("number", "string")
+            .when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when()
             .do(() => "wrong result")
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => "wrong result")
             .else(() => "correct result")
             .done();
@@ -141,11 +149,11 @@ describe("Helper overload", () => {
 
         const test1 = new Test1();
         let result = Overload.set("someString", test1)
-            .when("number", Test2)
+            .when(Overload.NUMBER, Overload.INSTANCE(Test2))
             .do(() => "wrong result")
-            .when("string", Test1)
+            .when(Overload.STRING, Overload.INSTANCE(Test1))
             .do(() => "correct result")
-            .when("string", Test2)
+            .when(Overload.STRING, Overload.INSTANCE(Test2))
             .do(() => "wrong result")
             .done();
         expect(result).to.be.equal("correct result");
@@ -153,11 +161,11 @@ describe("Helper overload", () => {
 
     it("return async result for typeof tests", () => {
         return Overload.set("someString", 12345)
-            .when("number", "string")
+            .when(Overload.NUMBER, Overload.STRING)
             .do(() => Promise.resolve("wrong result"))
-            .when("string", "number")
+            .when(Overload.STRING, Overload.NUMBER)
             .do(() => Promise.resolve("correct result"))
-            .when("number", "object")
+            .when(Overload.NUMBER, Overload.OBJECT)
             .do(() => Promise.resolve("wrong result"))
             .done()
             .then(result => {

@@ -117,7 +117,6 @@ exports.default = _Overload2.default;
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.UNDEFINED = exports.SYMBOL = exports.BOOLEAN = exports.FUNCTION = exports.OBJECT = exports.NUMBER = exports.STRING = undefined;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
@@ -132,14 +131,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var STRING = exports.STRING = "string";
-var NUMBER = exports.NUMBER = "number";
-var OBJECT = exports.OBJECT = "object";
-var FUNCTION = exports.FUNCTION = "function";
-var BOOLEAN = exports.BOOLEAN = "boolean";
-var SYMBOL = exports.SYMBOL = "symbol";
-var UNDEFINED = exports.UNDEFINED = "undefined";
 
 var Overload = function () {
     _createClass(Overload, null, [{
@@ -186,16 +177,14 @@ var Overload = function () {
             if (arguments.length === 0 && this._args.length === 0) {
                 checkCondition = true;
             } else if (arguments.length === this._args.length) {
-                checkCondition = Array.from(arguments).every(function (arg, index) {
-                    switch (typeof arg === "undefined" ? "undefined" : _typeof(arg)) {
-                        // means that this is expected typeof argument
-                        case "string":
-                            return _typeof(_this._args[index]) === arg;
-                        // means that this is function which positive result means that this is expected argument
+                checkCondition = Array.from(arguments).every(function (typeFunction, index) {
+                    switch (typeof typeFunction === "undefined" ? "undefined" : _typeof(typeFunction)) {
                         case "function":
-                            return _this._args[index] instanceof arg;
+                            return typeFunction().execute(_this._args[index]);
+                        case "object":
+                            return typeFunction.execute(_this._args[index]);
                         default:
-                            throw TypeError("Wrong arguments", arg);
+                            throw TypeError("Wrong arguments", typeFunction);
                     }
                 });
             }
@@ -248,6 +237,54 @@ var Overload = function () {
 
     return Overload;
 }();
+
+Overload.NUMBER = function () {
+    return { execute: function execute(arg) {
+            return typeof arg === "number";
+        } };
+};
+
+Overload.STRING = function () {
+    return { execute: function execute(arg) {
+            return typeof arg === "string";
+        } };
+};
+
+Overload.OBJECT = function () {
+    return { execute: function execute(arg) {
+            return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
+        } };
+};
+
+Overload.BOOLEAN = function () {
+    return { execute: function execute(arg) {
+            return typeof arg === "boolean";
+        } };
+};
+
+Overload.FUNCTION = function () {
+    return { execute: function execute(arg) {
+            return typeof arg === "function";
+        } };
+};
+
+Overload.SYMBOL = function () {
+    return { execute: function execute(arg) {
+            return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "symbol";
+        } };
+};
+
+Overload.UNDEFINED = function () {
+    return { execute: function execute(arg) {
+            return typeof arg === "undefined";
+        } };
+};
+
+Overload.INSTANCE = function (targetClass) {
+    return { execute: function execute(arg) {
+            return arg instanceof targetClass;
+        } };
+};
 
 exports.default = Overload;
 

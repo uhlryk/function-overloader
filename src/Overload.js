@@ -1,14 +1,15 @@
 import debug from "debug";
 
-export const STRING = "string";
-export const NUMBER = "number";
-export const OBJECT = "object";
-export const FUNCTION = "function";
-export const BOOLEAN = "boolean";
-export const SYMBOL = "symbol";
-export const UNDEFINED = "undefined";
-
 export default class Overload {
+    static NUMBER = () => ({ execute: arg => typeof arg === "number" });
+    static STRING = () => ({ execute: arg => typeof arg === "string" });
+    static OBJECT = () => ({ execute: arg => typeof arg === "object" });
+    static BOOLEAN = () => ({ execute: arg => typeof arg === "boolean" });
+    static FUNCTION = () => ({ execute: arg => typeof arg === "function" });
+    static SYMBOL = () => ({ execute: arg => typeof arg === "symbol" });
+    static UNDEFINED = () => ({ execute: arg => typeof arg === "undefined" });
+    static INSTANCE = targetClass => ({ execute: arg => arg instanceof targetClass });
+
     static set() {
         return new Overload(...arguments);
     }
@@ -40,16 +41,14 @@ export default class Overload {
         if (arguments.length === 0 && this._args.length === 0) {
             checkCondition = true;
         } else if (arguments.length === this._args.length) {
-            checkCondition = Array.from(arguments).every((arg, index) => {
-                switch (typeof arg) {
-                    // means that this is expected typeof argument
-                    case "string":
-                        return typeof this._args[index] === arg;
-                    // means that this is function which positive result means that this is expected argument
+            checkCondition = Array.from(arguments).every((typeFunction, index) => {
+                switch (typeof typeFunction) {
                     case "function":
-                        return this._args[index] instanceof arg;
+                        return typeFunction().execute(this._args[index]);
+                    case "object":
+                        return typeFunction.execute(this._args[index]);
                     default:
-                        throw TypeError("Wrong arguments", arg);
+                        throw TypeError("Wrong arguments", typeFunction);
                 }
             });
         }
