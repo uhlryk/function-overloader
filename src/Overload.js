@@ -1,14 +1,23 @@
 import debug from "debug";
 
+import numberType from "./types/number";
+import stringType from "./types/string";
+import objectType from "./types/object";
+import booleanType from "./types/boolean";
+import functionType from "./types/function";
+import symbolType from "./types/symbol";
+import undefinedType from "./types/undefined";
+import instanceType from "./types/instance";
+
 export default class Overload {
-    static NUMBER = () => ({ execute: arg => typeof arg === "number" });
-    static STRING = () => ({ execute: arg => typeof arg === "string" });
-    static OBJECT = () => ({ execute: arg => typeof arg === "object" });
-    static BOOLEAN = () => ({ execute: arg => typeof arg === "boolean" });
-    static FUNCTION = () => ({ execute: arg => typeof arg === "function" });
-    static SYMBOL = () => ({ execute: arg => typeof arg === "symbol" });
-    static UNDEFINED = () => ({ execute: arg => typeof arg === "undefined" });
-    static INSTANCE = targetClass => ({ execute: arg => arg instanceof targetClass });
+    static NUMBER = numberType;
+    static STRING = stringType;
+    static OBJECT = objectType;
+    static BOOLEAN = booleanType;
+    static FUNCTION = functionType;
+    static SYMBOL = symbolType;
+    static UNDEFINED = undefinedType;
+    static INSTANCE = instanceType;
 
     static set() {
         return new Overload(...arguments);

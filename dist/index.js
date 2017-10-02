@@ -126,6 +126,38 @@ var _debug = __webpack_require__(4);
 
 var _debug2 = _interopRequireDefault(_debug);
 
+var _number = __webpack_require__(5);
+
+var _number2 = _interopRequireDefault(_number);
+
+var _string = __webpack_require__(6);
+
+var _string2 = _interopRequireDefault(_string);
+
+var _object = __webpack_require__(7);
+
+var _object2 = _interopRequireDefault(_object);
+
+var _boolean = __webpack_require__(8);
+
+var _boolean2 = _interopRequireDefault(_boolean);
+
+var _function = __webpack_require__(9);
+
+var _function2 = _interopRequireDefault(_function);
+
+var _symbol = __webpack_require__(10);
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+var _undefined = __webpack_require__(11);
+
+var _undefined2 = _interopRequireDefault(_undefined);
+
+var _instance = __webpack_require__(12);
+
+var _instance2 = _interopRequireDefault(_instance);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -238,54 +270,14 @@ var Overload = function () {
     return Overload;
 }();
 
-Overload.NUMBER = function () {
-    return { execute: function execute(arg) {
-            return typeof arg === "number";
-        } };
-};
-
-Overload.STRING = function () {
-    return { execute: function execute(arg) {
-            return typeof arg === "string";
-        } };
-};
-
-Overload.OBJECT = function () {
-    return { execute: function execute(arg) {
-            return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
-        } };
-};
-
-Overload.BOOLEAN = function () {
-    return { execute: function execute(arg) {
-            return typeof arg === "boolean";
-        } };
-};
-
-Overload.FUNCTION = function () {
-    return { execute: function execute(arg) {
-            return typeof arg === "function";
-        } };
-};
-
-Overload.SYMBOL = function () {
-    return { execute: function execute(arg) {
-            return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "symbol";
-        } };
-};
-
-Overload.UNDEFINED = function () {
-    return { execute: function execute(arg) {
-            return typeof arg === "undefined";
-        } };
-};
-
-Overload.INSTANCE = function (targetClass) {
-    return { execute: function execute(arg) {
-            return arg instanceof targetClass;
-        } };
-};
-
+Overload.NUMBER = _number2.default;
+Overload.STRING = _string2.default;
+Overload.OBJECT = _object2.default;
+Overload.BOOLEAN = _boolean2.default;
+Overload.FUNCTION = _function2.default;
+Overload.SYMBOL = _symbol2.default;
+Overload.UNDEFINED = _undefined2.default;
+Overload.INSTANCE = _instance2.default;
 exports.default = Overload;
 
 /***/ }),
@@ -293,6 +285,146 @@ exports.default = Overload;
 /***/ (function(module, exports) {
 
 module.exports = require("debug");
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return typeof arg === "number";
+    } };
+};
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return typeof arg === "string";
+    } };
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
+    } };
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return typeof arg === "boolean";
+    } };
+};
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return typeof arg === "function";
+    } };
+};
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "symbol";
+    } };
+};
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function () {
+  return { execute: function execute(arg) {
+      return typeof arg === "undefined";
+    } };
+};
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (targetClass) {
+  return { execute: function execute(arg) {
+      return arg instanceof targetClass;
+    } };
+};
 
 /***/ })
 /******/ ]);
