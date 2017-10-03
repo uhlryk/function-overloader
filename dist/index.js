@@ -306,7 +306,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (arg) {
-  return typeof arg === "number";
+  return typeof arg === "number" || arg instanceof Number;
 };
 
 /***/ }),
@@ -321,7 +321,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (arg) {
-  return typeof arg === "string";
+  return typeof arg === "string" || arg instanceof String;
 };
 
 /***/ }),
@@ -338,7 +338,7 @@ Object.defineProperty(exports, "__esModule", {
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 exports.default = function (arg) {
-  return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
+  return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object" && arg !== null;
 };
 
 /***/ }),
@@ -353,7 +353,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (arg) {
-  return typeof arg === "boolean";
+  return typeof arg === "boolean" || arg instanceof Boolean;
 };
 
 /***/ }),

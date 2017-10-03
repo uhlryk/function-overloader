@@ -1,6 +1,7 @@
+/* eslint-disable no-new-wrappers */
 import Overload from "./Overload";
 
-describe("Helper overload", () => {
+describe("Overload", () => {
     it("ensure that 'when' method return only object with 'do' method", () => {
         let whenMethodResult = Overload.set().when();
         expect(whenMethodResult).to.have.property("do");
@@ -45,35 +46,11 @@ describe("Helper overload", () => {
     });
 
     it("resolved to correct types", () => {
-        let result = Overload.set("someString")
-            .when(Overload.STRING)
-            .do(() => "correct string")
-            .done();
-        expect(result).to.be.equal("correct string");
-
-        result = Overload.set(1234)
-            .when(Overload.NUMBER)
-            .do(() => "correct number")
-            .done();
-        expect(result).to.be.equal("correct number");
-
-        result = Overload.set(true)
-            .when(Overload.BOOLEAN)
-            .do(() => "correct bool")
-            .done();
-        expect(result).to.be.equal("correct bool");
-
-        result = Overload.set(() => {})
+        let result = Overload.set(() => {})
             .when(Overload.FUNCTION)
             .do(() => "correct function")
             .done();
         expect(result).to.be.equal("correct function");
-
-        result = Overload.set({})
-            .when(Overload.OBJECT)
-            .do(() => "correct object")
-            .done();
-        expect(result).to.be.equal("correct object");
 
         result = Overload.set(Symbol("test"))
             .when(Overload.SYMBOL)

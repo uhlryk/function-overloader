@@ -144,13 +144,13 @@ Return object with `do` method
 Accept multiple values that will descibe function.
 Possible values:
 
- * **Overload.STRING** or **Overload.STRING()**
- * **TYPES.NUMBER** or **TYPES.NUMBER()**
- * **TYPES.OBJECT** or **TYPES.OBJECT()**
- * **TYPES.FUNCTION** or **TYPES.FUNCTION()**
- * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()**
- * **TYPES.SYMBOL** or **TYPES.SYMBOL()**
- * **TYPES.UNDEFINED** or **TYPES.UNDEFINED()**
+ * **Overload.STRING** or **Overload.STRING()** for string primitive and string object
+ * **TYPES.NUMBER** or **TYPES.NUMBER()** for number primitive and number object
+ * **TYPES.OBJECT** or **TYPES.OBJECT()** for objects with exception for null 
+ * **TYPES.FUNCTION** or **TYPES.FUNCTION()** for functions
+ * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()** for boolean primitive and boolean object
+ * **TYPES.SYMBOL** or **TYPES.SYMBOL()** for symbols
+ * **TYPES.UNDEFINED** or **TYPES.UNDEFINED()** for undefined
  * **TYPES.INSTANCE(class)** check if argument instance of `class`
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  

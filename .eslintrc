@@ -22,8 +22,10 @@
     "globals": {
         "sinon": true,
         "it": true,
+        "xit": true,
         "expect": true,
         "describe": true,
+        "xdescribe": true,
         "request": true,
         "beforeEach": true,
         "before": true,
