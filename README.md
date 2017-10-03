@@ -26,12 +26,12 @@ class Monster {
 
     constructor() {
         Overload.set(...arguments)
-            .when("string", "number")
+            .when(Overload.STRING, Overload.NUMBER)
             .do((monsterName, level) => {
                 this.name = monsterName;
                 this.level = level;
             })
-            .when("object")
+            .when(Overload.OBJECT)
             .do(monsterData => {
                 this.name = monsterData.name;
                 this.level = monsterData.level;
@@ -42,9 +42,9 @@ class Monster {
     
     addAttribute() {
         return Overload.set(...arguments)
-            .when(Attribute)
+            .when(Overload.INSTANCE(Attribute))
             .do(this.addExisitingAttribute)
-            .when("string", "function")
+            .when(Overload.STRING, Overload.FUNCTION)
             .do(this.addNewAttribute)
             .done();
     }
@@ -109,9 +109,9 @@ then:
 ```javascript
 function someOverloadedFunction() {
     return Overload.set(...arguments)
-        .when("sometypeA1", "sometypeA2")
+        .when(<list of types>)
         .do(someFunctionHandlingFirstCase)
-        .when("sometypeB1", "sometypeB2")
+        .when(<list of types>)
         .do(someFunctionHandlingSecondCase)  
         .done();
 }
@@ -144,32 +144,16 @@ Return object with `do` method
 Accept multiple values that will descibe function.
 Possible values:
 
- * **"boolean"** 
- * **"number"**
- * **"string"**
- * **"symbol"**
- * **"function"**
- * **"undefined"**
- * **Constructor function / class** to define that argument should be an instance of provided class / constructor.
- 
+ * **Overload.STRING** or **Overload.STRING()**
+ * **TYPES.NUMBER** or **TYPES.NUMBER()**
+ * **TYPES.OBJECT** or **TYPES.OBJECT()**
+ * **TYPES.FUNCTION** or **TYPES.FUNCTION()**
+ * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()**
+ * **TYPES.SYMBOL** or **TYPES.SYMBOL()**
+ * **TYPES.UNDEFINED** or **TYPES.UNDEFINED()**
+ * **TYPES.INSTANCE(class)** check if argument instance of `class`
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
-
-In addition you can import `overloader` with build in types
-
-```
-import Overload, * as TYPES from "./Overload";
-```
-
-Then to define types you can:
-
- * **TYPES.STRING**
- * **TYPES.NUMBER**
- * **TYPES.OBJECT**
- * **TYPES.FUNCTION**
- * **TYPES.BOOLEAN**
- * **TYPES.SYMBOL**
- * **TYPES.UNDEFINED**
 
 ### .else()
 
