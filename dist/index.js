@@ -164,6 +164,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function createType(typeCondition) {
+    return function (input) {
+        return { execute: function execute(arg) {
+                return typeCondition(arg, input);
+            } };
+    };
+}
+
 var Overload = function () {
     _createClass(Overload, null, [{
         key: "set",
@@ -270,14 +278,14 @@ var Overload = function () {
     return Overload;
 }();
 
-Overload.NUMBER = _number2.default;
-Overload.STRING = _string2.default;
-Overload.OBJECT = _object2.default;
-Overload.BOOLEAN = _boolean2.default;
-Overload.FUNCTION = _function2.default;
-Overload.SYMBOL = _symbol2.default;
-Overload.UNDEFINED = _undefined2.default;
-Overload.INSTANCE = _instance2.default;
+Overload.NUMBER = createType(_number2.default);
+Overload.STRING = createType(_string2.default);
+Overload.OBJECT = createType(_object2.default);
+Overload.BOOLEAN = createType(_boolean2.default);
+Overload.FUNCTION = createType(_function2.default);
+Overload.SYMBOL = createType(_symbol2.default);
+Overload.UNDEFINED = createType(_undefined2.default);
+Overload.INSTANCE = createType(_instance2.default);
 exports.default = Overload;
 
 /***/ }),
@@ -297,10 +305,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return typeof arg === "number";
-    } };
+exports.default = function (arg) {
+  return typeof arg === "number";
 };
 
 /***/ }),
@@ -314,10 +320,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return typeof arg === "string";
-    } };
+exports.default = function (arg) {
+  return typeof arg === "string";
 };
 
 /***/ }),
@@ -333,10 +337,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
-    } };
+exports.default = function (arg) {
+  return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object";
 };
 
 /***/ }),
@@ -350,10 +352,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return typeof arg === "boolean";
-    } };
+exports.default = function (arg) {
+  return typeof arg === "boolean";
 };
 
 /***/ }),
@@ -367,10 +367,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return typeof arg === "function";
-    } };
+exports.default = function (arg) {
+  return typeof arg === "function";
 };
 
 /***/ }),
@@ -386,10 +384,8 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "symbol";
-    } };
+exports.default = function (arg) {
+  return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "symbol";
 };
 
 /***/ }),
@@ -403,10 +399,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function () {
-  return { execute: function execute(arg) {
-      return typeof arg === "undefined";
-    } };
+exports.default = function (arg) {
+  return typeof arg === "undefined";
 };
 
 /***/ }),
@@ -420,10 +414,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-exports.default = function (targetClass) {
-  return { execute: function execute(arg) {
-      return arg instanceof targetClass;
-    } };
+exports.default = function (arg, targetClass) {
+  return arg instanceof targetClass;
 };
 
 /***/ })

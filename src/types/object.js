@@ -1,1 +1,1 @@
-export default () => ({ execute: arg => typeof arg === "object" });
+export default arg => typeof arg === "object";

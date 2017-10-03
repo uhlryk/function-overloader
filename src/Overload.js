@@ -1,23 +1,27 @@
 import debug from "debug";
 
-import numberType from "./types/number";
-import stringType from "./types/string";
-import objectType from "./types/object";
-import booleanType from "./types/boolean";
-import functionType from "./types/function";
-import symbolType from "./types/symbol";
-import undefinedType from "./types/undefined";
-import instanceType from "./types/instance";
+import numberCondition from "./types/number";
+import stringCondition from "./types/string";
+import objectCondition from "./types/object";
+import booleanCondition from "./types/boolean";
+import functionCondition from "./types/function";
+import symbolCondition from "./types/symbol";
+import undefinedCondition from "./types/undefined";
+import instanceCondition from "./types/instance";
+
+function createType(typeCondition) {
+    return input => ({ execute: arg => typeCondition(arg, input) });
+}
 
 export default class Overload {
-    static NUMBER = numberType;
-    static STRING = stringType;
-    static OBJECT = objectType;
-    static BOOLEAN = booleanType;
-    static FUNCTION = functionType;
-    static SYMBOL = symbolType;
-    static UNDEFINED = undefinedType;
-    static INSTANCE = instanceType;
+    static NUMBER = createType(numberCondition);
+    static STRING = createType(stringCondition);
+    static OBJECT = createType(objectCondition);
+    static BOOLEAN = createType(booleanCondition);
+    static FUNCTION = createType(functionCondition);
+    static SYMBOL = createType(symbolCondition);
+    static UNDEFINED = createType(undefinedCondition);
+    static INSTANCE = createType(instanceCondition);
 
     static set() {
         return new Overload(...arguments);
