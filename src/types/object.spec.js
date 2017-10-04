@@ -7,9 +7,9 @@ describe("Object type", () => {
     });
 
     it("returns true for primitive constructors", () => {
-        expect(object(new String("test"))).to.be.true();
-        expect(object(new Number(123))).to.be.true();
-        expect(object(new Boolean(true))).to.be.true();
+        expect(object(new String("test"))).to.be.false();
+        expect(object(new Number(123))).to.be.false();
+        expect(object(new Boolean(true))).to.be.false();
     });
 
     xit("returns false for arrays", () => {

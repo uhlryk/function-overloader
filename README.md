@@ -146,7 +146,7 @@ Possible values:
 
  * **Overload.STRING** or **Overload.STRING()** for string primitive and string object
  * **TYPES.NUMBER** or **TYPES.NUMBER()** for number primitive and number object
- * **TYPES.OBJECT** or **TYPES.OBJECT()** for objects with exception for null 
+ * **TYPES.OBJECT** or **TYPES.OBJECT()** for objects with exception for null and primitive wrappers (primitive objects like Number, String, Boolean) 
  * **TYPES.FUNCTION** or **TYPES.FUNCTION()** for functions
  * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()** for boolean primitive and boolean object
  * **TYPES.SYMBOL** or **TYPES.SYMBOL()** for symbols
