@@ -46,15 +46,9 @@ describe("Overload", () => {
     });
 
     it("resolved to correct types", () => {
-        let result = Overload.set(undefined)
-            .when(Overload.UNDEFINED)
-            .do(() => "correct undefined")
-            .done();
-        expect(result).to.be.equal("correct undefined");
-
         class Test {}
         let test = new Test();
-        result = Overload.set(test)
+        let result = Overload.set(test)
             .when(Overload.INSTANCE(Test))
             .do(() => "correct undefined")
             .done();

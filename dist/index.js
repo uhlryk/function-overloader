@@ -138,27 +138,31 @@ var _object = __webpack_require__(7);
 
 var _object2 = _interopRequireDefault(_object);
 
-var _boolean = __webpack_require__(8);
+var _array = __webpack_require__(8);
+
+var _array2 = _interopRequireDefault(_array);
+
+var _boolean = __webpack_require__(9);
 
 var _boolean2 = _interopRequireDefault(_boolean);
 
-var _function = __webpack_require__(9);
+var _function = __webpack_require__(10);
 
 var _function2 = _interopRequireDefault(_function);
 
-var _symbol = __webpack_require__(10);
+var _symbol = __webpack_require__(11);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _undefined = __webpack_require__(11);
+var _undefined = __webpack_require__(12);
 
 var _undefined2 = _interopRequireDefault(_undefined);
 
-var _instance = __webpack_require__(12);
+var _instance = __webpack_require__(13);
 
 var _instance2 = _interopRequireDefault(_instance);
 
-var _null = __webpack_require__(13);
+var _null = __webpack_require__(14);
 
 var _null2 = _interopRequireDefault(_null);
 
@@ -285,6 +289,7 @@ var Overload = function () {
 Overload.NUMBER = createType(_number2.default);
 Overload.STRING = createType(_string2.default);
 Overload.OBJECT = createType(_object2.default);
+Overload.ARRAY = createType(_array2.default);
 Overload.BOOLEAN = createType(_boolean2.default);
 Overload.FUNCTION = createType(_function2.default);
 Overload.SYMBOL = createType(_symbol2.default);
@@ -357,8 +362,10 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 exports.default = function (arg) {
-  return typeof arg === "boolean" || arg instanceof Boolean;
+  return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object" && arg instanceof Array;
 };
 
 /***/ }),
@@ -373,11 +380,26 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 exports.default = function (arg) {
-  return typeof arg === "function";
+  return typeof arg === "boolean" || arg instanceof Boolean;
 };
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (arg) {
+  return typeof arg === "function";
+};
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -394,7 +416,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,7 +431,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -424,7 +446,7 @@ exports.default = function (arg, targetClass) {
 };
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

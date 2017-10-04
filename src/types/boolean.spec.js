@@ -1,7 +1,7 @@
 /* eslint-disable no-new-wrappers */
 import boolean from "./boolean";
 
-describe("Booleand type", () => {
+describe("Boolean type", () => {
     it("returns true for booleans", () => {
         expect(boolean(true)).to.be.true();
         expect(boolean(false)).to.be.true();

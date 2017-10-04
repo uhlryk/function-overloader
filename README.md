@@ -145,14 +145,15 @@ Accept multiple values that will descibe function.
 Possible values:
 
  * **Overload.STRING** or **Overload.STRING()** for string primitive and string object
- * **TYPES.NUMBER** or **TYPES.NUMBER()** for number primitive and number object
- * **TYPES.OBJECT** or **TYPES.OBJECT()** for objects with exception for null and primitive wrappers (primitive objects like Number, String, Boolean) 
- * **TYPES.FUNCTION** or **TYPES.FUNCTION()** for functions
- * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()** for boolean primitive and boolean object
- * **TYPES.SYMBOL** or **TYPES.SYMBOL()** for symbols
- * **TYPES.UNDEFINED** or **TYPES.UNDEFINED()** for undefined
- * **TYPES.NULL** or **TYPES.NULL()** for null
- * **TYPES.INSTANCE(class)** check if argument instance of `class`
+ * **Overload.ARRAY** or **Overload.ARRAY()** for arrays
+ * **Overload.NUMBER** or **Overload.NUMBER()** for number primitive and number object
+ * **Overload.OBJECT** or **Overload.OBJECT()** for objects with exception for null and primitive wrappers (primitive objects like Number, String, Boolean) 
+ * **Overload.FUNCTION** or **Overload.FUNCTION()** for functions
+ * **Overload.BOOLEAN** or **Overload.BOOLEAN()** for boolean primitive and boolean object
+ * **Overload.SYMBOL** or **Overload.SYMBOL()** for symbols
+ * **Overload.UNDEFINED** or **Overload.UNDEFINED()** for undefined
+ * **Overload.NULL** or **Overload.NULL()** for null
+ * **Overload.INSTANCE(class)** check if argument instance of `class`
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
 

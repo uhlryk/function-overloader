@@ -3,6 +3,7 @@ import debug from "debug";
 import numberCondition from "./types/number";
 import stringCondition from "./types/string";
 import objectCondition from "./types/object";
+import arrayCondition from "./types/array";
 import booleanCondition from "./types/boolean";
 import functionCondition from "./types/function";
 import symbolCondition from "./types/symbol";
@@ -18,6 +19,7 @@ export default class Overload {
     static NUMBER = createType(numberCondition);
     static STRING = createType(stringCondition);
     static OBJECT = createType(objectCondition);
+    static ARRAY = createType(arrayCondition);
     static BOOLEAN = createType(booleanCondition);
     static FUNCTION = createType(functionCondition);
     static SYMBOL = createType(symbolCondition);
