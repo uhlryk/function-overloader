@@ -8,6 +8,7 @@ import functionCondition from "./types/function";
 import symbolCondition from "./types/symbol";
 import undefinedCondition from "./types/undefined";
 import instanceCondition from "./types/instance";
+import nullCondition from "./types/null";
 
 function createType(typeCondition) {
     return input => ({ execute: arg => typeCondition(arg, input) });
@@ -21,6 +22,7 @@ export default class Overload {
     static FUNCTION = createType(functionCondition);
     static SYMBOL = createType(symbolCondition);
     static UNDEFINED = createType(undefinedCondition);
+    static NULL = createType(nullCondition);
     static INSTANCE = createType(instanceCondition);
 
     static set() {

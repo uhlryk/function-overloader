@@ -46,19 +46,7 @@ describe("Overload", () => {
     });
 
     it("resolved to correct types", () => {
-        let result = Overload.set(() => {})
-            .when(Overload.FUNCTION)
-            .do(() => "correct function")
-            .done();
-        expect(result).to.be.equal("correct function");
-
-        result = Overload.set(Symbol("test"))
-            .when(Overload.SYMBOL)
-            .do(() => "correct symbol")
-            .done();
-        expect(result).to.be.equal("correct symbol");
-
-        result = Overload.set(undefined)
+        let result = Overload.set(undefined)
             .when(Overload.UNDEFINED)
             .do(() => "correct undefined")
             .done();

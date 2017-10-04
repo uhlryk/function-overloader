@@ -151,6 +151,7 @@ Possible values:
  * **TYPES.BOOLEAN** or **TYPES.BOOLEAN()** for boolean primitive and boolean object
  * **TYPES.SYMBOL** or **TYPES.SYMBOL()** for symbols
  * **TYPES.UNDEFINED** or **TYPES.UNDEFINED()** for undefined
+ * **TYPES.NULL** or **TYPES.NULL()** for null
  * **TYPES.INSTANCE(class)** check if argument instance of `class`
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
