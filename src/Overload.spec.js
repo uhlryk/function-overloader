@@ -46,10 +46,56 @@ describe("Overload", () => {
     });
 
     it("resolved to correct types", () => {
-        class Test {}
-        let test = new Test();
-        let result = Overload.set(test)
-            .when(Overload.INSTANCE(Test))
+        let result = Overload.set("someString")
+            .when(Overload.STRING)
+            .do(() => "correct string")
+            .done();
+        expect(result).to.be.equal("correct string");
+
+        result = Overload.set(1234)
+            .when(Overload.NUMBER)
+            .do(() => "correct number")
+            .done();
+        expect(result).to.be.equal("correct number");
+
+        result = Overload.set(true)
+            .when(Overload.BOOLEAN)
+            .do(() => "correct bool")
+            .done();
+        expect(result).to.be.equal("correct bool");
+
+        result = Overload.set(() => {})
+            .when(Overload.FUNCTION)
+            .do(() => "correct function")
+            .done();
+        expect(result).to.be.equal("correct function");
+
+        result = Overload.set({})
+            .when(Overload.OBJECT)
+            .do(() => "correct object")
+            .done();
+        expect(result).to.be.equal("correct object");
+
+        result = Overload.set([])
+            .when(Overload.ARRAY)
+            .do(() => "correct object")
+            .done();
+        expect(result).to.be.equal("correct object");
+
+        result = Overload.set(null)
+            .when(Overload.NULL)
+            .do(() => "correct object")
+            .done();
+        expect(result).to.be.equal("correct object");
+
+        result = Overload.set(Symbol("test"))
+            .when(Overload.SYMBOL)
+            .do(() => "correct symbol")
+            .done();
+        expect(result).to.be.equal("correct symbol");
+
+        result = Overload.set(undefined)
+            .when(Overload.UNDEFINED)
             .do(() => "correct undefined")
             .done();
         expect(result).to.be.equal("correct undefined");
