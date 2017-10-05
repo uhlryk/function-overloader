@@ -144,6 +144,7 @@ Return object with `do` method
 Accept multiple values that will descibe function.
 Possible values:
 
+ * **Overload.ANY** or **Overload.ANY()** for any type
  * **Overload.STRING** or **Overload.STRING()** for string primitive and string object
  * **Overload.ARRAY** or **Overload.ARRAY()** for arrays
  * **Overload.NUMBER** or **Overload.NUMBER()** for number primitive and number object

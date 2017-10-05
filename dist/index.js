@@ -166,6 +166,10 @@ var _null = __webpack_require__(14);
 
 var _null2 = _interopRequireDefault(_null);
 
+var _any = __webpack_require__(15);
+
+var _any2 = _interopRequireDefault(_any);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -295,6 +299,7 @@ Overload.FUNCTION = createType(_function2.default);
 Overload.SYMBOL = createType(_symbol2.default);
 Overload.UNDEFINED = createType(_undefined2.default);
 Overload.NULL = createType(_null2.default);
+Overload.ANY = createType(_any2.default);
 Overload.INSTANCE = createType(_instance2.default);
 exports.default = Overload;
 
@@ -458,6 +463,21 @@ Object.defineProperty(exports, "__esModule", {
 
 exports.default = function (arg) {
   return arg === null;
+};
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+exports.default = function (arg) {
+  return true;
 };
 
 /***/ })

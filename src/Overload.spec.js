@@ -99,6 +99,12 @@ describe("Overload", () => {
             .do(() => "correct undefined")
             .done();
         expect(result).to.be.equal("correct undefined");
+
+        result = Overload.set("test")
+            .when(Overload.ANY)
+            .do(() => "correct undefined")
+            .done();
+        expect(result).to.be.equal("correct undefined");
     });
 
     it("return correct response when expected undefined as argument", () => {
