@@ -268,7 +268,7 @@ var Overload = function () {
             this._debug("elseThrow");
             if (this._enabled) {
                 this._enabled = false;
-                throw TypeError();
+                throw TypeError("Wrong parameters", this._args);
             }
             return {
                 done: this.done
