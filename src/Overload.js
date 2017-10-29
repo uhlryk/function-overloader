@@ -56,26 +56,12 @@ export default class Overload {
    */
     when() {
         this._debug("when", Array.from(arguments));
-        let checkCondition = false;
-        if (arguments.length === 0 && this._args.length === 0) {
-            checkCondition = true;
-        } else if (arguments.length === this._args.length) {
-            checkCondition = Array.from(arguments).every((typeFunction, index) => {
-                switch (typeof typeFunction) {
-                    case "function":
-                        return typeFunction().execute(this._args[index]);
-                    case "object":
-                        return typeFunction.execute(this._args[index]);
-                    default:
-                        throw TypeError("Wrong arguments", typeFunction);
-                }
-            });
-        }
-        this._debug("result", checkCondition);
+        let conditionResult = checkCondition(arguments, this._args);
+        this._debug("result", conditionResult);
         return {
             do: callback => {
                 this._debug("do");
-                if (checkCondition && this._enabled) {
+                if (conditionResult && this._enabled) {
                     this._debug("execute function");
                     this._enabled = false;
                     let result = callback(...this._args);
@@ -85,6 +71,7 @@ export default class Overload {
                 return {
                     when: this.when,
                     else: this.else,
+                    elseThrow: this.elseThrow,
                     done: this.done
                 };
             }
@@ -105,11 +92,43 @@ export default class Overload {
         };
     }
 
+    elseThrow() {
+        this._debug("elseThrow");
+        if (this._enabled) {
+            this._enabled = false;
+            throw TypeError();
+        }
+        return {
+            done: this.done
+        };
+    }
+
     /**
    * Should be called at the end. It will return result from called use callback
    * @returns {*}
    */
     done() {
         return this._result;
+    }
+}
+
+function checkCondition(conditionArguments, testedArguments) {
+    if (conditionArguments.length === testedArguments.length) {
+        return Array.from(conditionArguments).every((typeFunction, index) => {
+            const testedArgument = testedArguments[index];
+            return checkTypeCondition(typeFunction, testedArgument);
+        });
+    }
+    return false;
+}
+
+function checkTypeCondition(typeFunction, testedArgument) {
+    switch (typeof typeFunction) {
+        case "function":
+            return typeFunction().execute(testedArgument);
+        case "object":
+            return typeFunction.execute(testedArgument);
+        default:
+            throw TypeError("Wrong arguments", typeFunction);
     }
 }

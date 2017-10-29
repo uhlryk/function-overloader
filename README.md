@@ -167,6 +167,15 @@ Accept callback function. Will invoke it when other criteria are not met.
 
 Return object with `done` method.
 
+### .elseThrow()
+
+```javascript
+.elseThrow()
+```
+Throws TypeError if not any above condition met
+
+Return object with `done` method.
+
 ### .done()
 
 ```javascript

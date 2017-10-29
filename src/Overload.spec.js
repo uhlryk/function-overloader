@@ -7,15 +7,17 @@ describe("Overload", () => {
         expect(whenMethodResult).to.have.property("do");
         expect(whenMethodResult).to.not.have.property("when");
         expect(whenMethodResult).to.not.have.property("else");
+        expect(whenMethodResult).to.not.have.property("elseThrow");
         expect(whenMethodResult).to.not.have.property("done");
     });
 
-    it("ensure that 'do' method return object with 'when' & 'else' & 'done' methods", () => {
+    it("ensure that 'do' method return object with 'when' & 'else' & 'elseThrow' & 'done' methods", () => {
         let doMethodResult = Overload.set()
             .when()
             .do(() => {});
         expect(doMethodResult).to.have.property("when");
         expect(doMethodResult).to.have.property("else");
+        expect(doMethodResult).to.have.property("elseThrow");
         expect(doMethodResult).to.have.property("done");
         expect(doMethodResult).to.not.have.property("do");
     });
@@ -25,6 +27,16 @@ describe("Overload", () => {
         expect(elseMethodResult).to.have.property("done");
         expect(elseMethodResult).to.not.have.property("when");
         expect(elseMethodResult).to.not.have.property("else");
+        expect(elseMethodResult).to.not.have.property("elseThrow");
+        expect(elseMethodResult).to.not.have.property("do");
+    });
+
+    it("ensure that 'elseThrow' method return only object with 'done' method", () => {
+        let elseMethodResult = Overload.set().else(() => {});
+        expect(elseMethodResult).to.have.property("done");
+        expect(elseMethodResult).to.not.have.property("when");
+        expect(elseMethodResult).to.not.have.property("else");
+        expect(elseMethodResult).to.not.have.property("elseThrow");
         expect(elseMethodResult).to.not.have.property("do");
     });
 
@@ -152,6 +164,20 @@ describe("Overload", () => {
             .else(() => "correct result")
             .done();
         expect(result).to.be.equal("correct result");
+    });
+
+    it("invoke elseThrow when no condition met", () => {
+        expect(() => {
+            Overload.set(10, 10)
+                .when(Overload.NUMBER, Overload.STRING)
+                .do(() => "wrong result")
+                .when()
+                .do(() => "wrong result")
+                .when(Overload.NUMBER, Overload.OBJECT)
+                .do(() => "wrong result")
+                .elseThrow()
+                .done();
+        }).to.throw(TypeError);
     });
 
     it("return sync result for classes", () => {

@@ -225,26 +225,12 @@ var Overload = function () {
             var _this = this;
 
             this._debug("when", Array.from(arguments));
-            var checkCondition = false;
-            if (arguments.length === 0 && this._args.length === 0) {
-                checkCondition = true;
-            } else if (arguments.length === this._args.length) {
-                checkCondition = Array.from(arguments).every(function (typeFunction, index) {
-                    switch (typeof typeFunction === "undefined" ? "undefined" : _typeof(typeFunction)) {
-                        case "function":
-                            return typeFunction().execute(_this._args[index]);
-                        case "object":
-                            return typeFunction.execute(_this._args[index]);
-                        default:
-                            throw TypeError("Wrong arguments", typeFunction);
-                    }
-                });
-            }
-            this._debug("result", checkCondition);
+            var conditionResult = checkCondition(arguments, this._args);
+            this._debug("result", conditionResult);
             return {
                 do: function _do(callback) {
                     _this._debug("do");
-                    if (checkCondition && _this._enabled) {
+                    if (conditionResult && _this._enabled) {
                         _this._debug("execute function");
                         _this._enabled = false;
                         var result = callback.apply(undefined, _toConsumableArray(_this._args));
@@ -254,6 +240,7 @@ var Overload = function () {
                     return {
                         when: _this.when,
                         else: _this.else,
+                        elseThrow: _this.elseThrow,
                         done: _this.done
                     };
                 }
@@ -269,6 +256,18 @@ var Overload = function () {
                 var result = callback.apply(undefined, _toConsumableArray(this._args));
                 this._debug("function sync result", result);
                 this._result = result;
+            }
+            return {
+                done: this.done
+            };
+        }
+    }, {
+        key: "elseThrow",
+        value: function elseThrow() {
+            this._debug("elseThrow");
+            if (this._enabled) {
+                this._enabled = false;
+                throw TypeError();
             }
             return {
                 done: this.done
@@ -302,6 +301,28 @@ Overload.NULL = createType(_null2.default);
 Overload.ANY = createType(_any2.default);
 Overload.INSTANCE = createType(_instance2.default);
 exports.default = Overload;
+
+
+function checkCondition(conditionArguments, testedArguments) {
+    if (conditionArguments.length === testedArguments.length) {
+        return Array.from(conditionArguments).every(function (typeFunction, index) {
+            var testedArgument = testedArguments[index];
+            return checkTypeCondition(typeFunction, testedArgument);
+        });
+    }
+    return false;
+}
+
+function checkTypeCondition(typeFunction, testedArgument) {
+    switch (typeof typeFunction === "undefined" ? "undefined" : _typeof(typeFunction)) {
+        case "function":
+            return typeFunction().execute(testedArgument);
+        case "object":
+            return typeFunction.execute(testedArgument);
+        default:
+            throw TypeError("Wrong arguments", typeFunction);
+    }
+}
 
 /***/ }),
 /* 4 */
