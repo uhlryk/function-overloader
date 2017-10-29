@@ -207,6 +207,7 @@ var Overload = function () {
 
         this.when = this.when.bind(this);
         this.else = this.else.bind(this);
+        this.elseThrow = this.elseThrow.bind(this);
         this.done = this.done.bind(this);
     }
 
