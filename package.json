@@ -1,6 +1,6 @@
 {
   "name": "function-overloader",
-  "version": "1.10.3",
+  "version": "1.11.0",
   "description": "improve overloading functions and methods in js",
   "main": "dist/index.js",
   "scripts": {
