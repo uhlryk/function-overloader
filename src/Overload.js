@@ -1,4 +1,5 @@
 import debug from "debug";
+import checkCondition from "./checkCondition";
 
 import numberCondition from "./types/number";
 import stringCondition from "./types/string";
@@ -110,26 +111,5 @@ export default class Overload {
    */
     done() {
         return this._result;
-    }
-}
-
-function checkCondition(conditionArguments, testedArguments) {
-    if (conditionArguments.length === testedArguments.length) {
-        return Array.from(conditionArguments).every((typeFunction, index) => {
-            const testedArgument = testedArguments[index];
-            return checkTypeCondition(typeFunction, testedArgument);
-        });
-    }
-    return false;
-}
-
-function checkTypeCondition(typeFunction, testedArgument) {
-    switch (typeof typeFunction) {
-        case "function":
-            return typeFunction().execute(testedArgument);
-        case "object":
-            return typeFunction.execute(testedArgument);
-        default:
-            throw TypeError("Wrong arguments", typeFunction);
     }
 }

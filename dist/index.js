@@ -118,55 +118,57 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _debug = __webpack_require__(4);
 
 var _debug2 = _interopRequireDefault(_debug);
 
-var _number = __webpack_require__(5);
+var _checkCondition = __webpack_require__(5);
+
+var _checkCondition2 = _interopRequireDefault(_checkCondition);
+
+var _number = __webpack_require__(7);
 
 var _number2 = _interopRequireDefault(_number);
 
-var _string = __webpack_require__(6);
+var _string = __webpack_require__(8);
 
 var _string2 = _interopRequireDefault(_string);
 
-var _object = __webpack_require__(7);
+var _object = __webpack_require__(9);
 
 var _object2 = _interopRequireDefault(_object);
 
-var _array = __webpack_require__(8);
+var _array = __webpack_require__(10);
 
 var _array2 = _interopRequireDefault(_array);
 
-var _boolean = __webpack_require__(9);
+var _boolean = __webpack_require__(11);
 
 var _boolean2 = _interopRequireDefault(_boolean);
 
-var _function = __webpack_require__(10);
+var _function = __webpack_require__(12);
 
 var _function2 = _interopRequireDefault(_function);
 
-var _symbol = __webpack_require__(11);
+var _symbol = __webpack_require__(13);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _undefined = __webpack_require__(12);
+var _undefined = __webpack_require__(14);
 
 var _undefined2 = _interopRequireDefault(_undefined);
 
-var _instance = __webpack_require__(13);
+var _instance = __webpack_require__(15);
 
 var _instance2 = _interopRequireDefault(_instance);
 
-var _null = __webpack_require__(14);
+var _null = __webpack_require__(16);
 
 var _null2 = _interopRequireDefault(_null);
 
-var _any = __webpack_require__(15);
+var _any = __webpack_require__(17);
 
 var _any2 = _interopRequireDefault(_any);
 
@@ -226,7 +228,7 @@ var Overload = function () {
             var _this = this;
 
             this._debug("when", Array.from(arguments));
-            var conditionResult = checkCondition(arguments, this._args);
+            var conditionResult = (0, _checkCondition2.default)(arguments, this._args);
             this._debug("result", conditionResult);
             return {
                 do: function _do(callback) {
@@ -303,28 +305,6 @@ Overload.ANY = createType(_any2.default);
 Overload.INSTANCE = createType(_instance2.default);
 exports.default = Overload;
 
-
-function checkCondition(conditionArguments, testedArguments) {
-    if (conditionArguments.length === testedArguments.length) {
-        return Array.from(conditionArguments).every(function (typeFunction, index) {
-            var testedArgument = testedArguments[index];
-            return checkTypeCondition(typeFunction, testedArgument);
-        });
-    }
-    return false;
-}
-
-function checkTypeCondition(typeFunction, testedArgument) {
-    switch (typeof typeFunction === "undefined" ? "undefined" : _typeof(typeFunction)) {
-        case "function":
-            return typeFunction().execute(testedArgument);
-        case "object":
-            return typeFunction.execute(testedArgument);
-        default:
-            throw TypeError("Wrong arguments", typeFunction);
-    }
-}
-
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
@@ -339,6 +319,89 @@ module.exports = require("debug");
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = checkCondition;
+
+var _checkTypeCondition = __webpack_require__(6);
+
+var _checkTypeCondition2 = _interopRequireDefault(_checkTypeCondition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function checkCondition(conditionArguments, testedArguments) {
+    if (conditionArguments.length === testedArguments.length) {
+        return Array.from(conditionArguments).every(function (conditionArgument, index) {
+            var testedArgument = testedArguments[index];
+            return (0, _checkTypeCondition2.default)(conditionArgument, testedArgument, index, conditionArguments, testedArguments);
+        });
+    }
+    return false;
+}
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+exports.default = checkTypeCondition;
+function checkTypeCondition(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
+    return [functionConditionArgument, objectConditionArgument, elseConditionArgument].map(function (conditionArgumentFactory) {
+        return conditionArgumentFactory(conditionArgument, testedArgument);
+    }).find(function (conditionArgumentObject) {
+        return conditionArgumentObject.test();
+    }).execute();
+}
+
+function functionConditionArgument(conditionArgument, testedArgument) {
+    return {
+        execute: function execute() {
+            return conditionArgument().execute(testedArgument);
+        },
+        test: function test() {
+            return typeof conditionArgument === "function";
+        }
+    };
+}
+
+function objectConditionArgument(conditionArgument, testedArgument) {
+    return {
+        execute: function execute() {
+            return conditionArgument.execute(testedArgument);
+        },
+        test: function test() {
+            return (typeof conditionArgument === "undefined" ? "undefined" : _typeof(conditionArgument)) === "object";
+        }
+    };
+}
+
+function elseConditionArgument(conditionArgument, testedArgument) {
+    return {
+        execute: function execute() {
+            throw TypeError("Wrong arguments", conditionArgument);
+        },
+        test: function test() {
+            return true;
+        }
+    };
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -347,7 +410,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 6 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -362,7 +425,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 7 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -379,7 +442,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -396,7 +459,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -411,7 +474,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 10 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -426,7 +489,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 11 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -443,7 +506,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 12 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -458,7 +521,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 13 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -473,7 +536,7 @@ exports.default = function (arg, targetClass) {
 };
 
 /***/ }),
-/* 14 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -488,7 +551,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 15 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
