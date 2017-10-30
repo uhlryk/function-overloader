@@ -6,15 +6,17 @@ export default function checkTypeCondition(
     testedArguments
 ) {
     return [functionConditionArgument, objectConditionArgument, elseConditionArgument]
-        .map(conditionArgumentFactory => conditionArgumentFactory(conditionArgument, testedArgument))
+        .map(conditionArgumentFactory =>
+            conditionArgumentFactory(conditionArgument, testedArgument, index, conditionArguments, testedArguments)
+        )
         .find(conditionArgumentObject => conditionArgumentObject.test())
         .execute();
 }
 
-function functionConditionArgument(conditionArgument, testedArgument) {
+function functionConditionArgument(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
     return {
         execute() {
-            return conditionArgument().execute(testedArgument);
+            return conditionArgument().execute(testedArgument, index, conditionArguments, testedArguments);
         },
         test() {
             return typeof conditionArgument === "function";
@@ -22,10 +24,10 @@ function functionConditionArgument(conditionArgument, testedArgument) {
     };
 }
 
-function objectConditionArgument(conditionArgument, testedArgument) {
+function objectConditionArgument(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
     return {
         execute() {
-            return conditionArgument.execute(testedArgument);
+            return conditionArgument.execute(testedArgument, index, conditionArguments, testedArguments);
         },
         test() {
             return typeof conditionArgument === "object";
@@ -33,7 +35,7 @@ function objectConditionArgument(conditionArgument, testedArgument) {
     };
 }
 
-function elseConditionArgument(conditionArgument, testedArgument) {
+function elseConditionArgument(conditionArgument) {
     return {
         execute() {
             throw TypeError("Wrong arguments", conditionArgument);

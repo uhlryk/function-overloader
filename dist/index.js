@@ -351,16 +351,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 exports.default = checkTypeCondition;
 function checkTypeCondition(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
     return [functionConditionArgument, objectConditionArgument, elseConditionArgument].map(function (conditionArgumentFactory) {
-        return conditionArgumentFactory(conditionArgument, testedArgument);
+        return conditionArgumentFactory(conditionArgument, testedArgument, index, conditionArguments, testedArguments);
     }).find(function (conditionArgumentObject) {
         return conditionArgumentObject.test();
     }).execute();
 }
 
-function functionConditionArgument(conditionArgument, testedArgument) {
+function functionConditionArgument(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
     return {
         execute: function execute() {
-            return conditionArgument().execute(testedArgument);
+            return conditionArgument().execute(testedArgument, index, conditionArguments, testedArguments);
         },
         test: function test() {
             return typeof conditionArgument === "function";
@@ -368,10 +368,10 @@ function functionConditionArgument(conditionArgument, testedArgument) {
     };
 }
 
-function objectConditionArgument(conditionArgument, testedArgument) {
+function objectConditionArgument(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
     return {
         execute: function execute() {
-            return conditionArgument.execute(testedArgument);
+            return conditionArgument.execute(testedArgument, index, conditionArguments, testedArguments);
         },
         test: function test() {
             return (typeof conditionArgument === "undefined" ? "undefined" : _typeof(conditionArgument)) === "object";
@@ -379,7 +379,7 @@ function objectConditionArgument(conditionArgument, testedArgument) {
     };
 }
 
-function elseConditionArgument(conditionArgument, testedArgument) {
+function elseConditionArgument(conditionArgument) {
     return {
         execute: function execute() {
             throw TypeError("Wrong arguments", conditionArgument);
@@ -404,8 +404,8 @@ exports.default = createType;
 function createType(typeCondition) {
     return function (typeInput) {
         return {
-            execute: function execute(testedArgument) {
-                return typeCondition(testedArgument, typeInput);
+            execute: function execute(testedArgument, index, conditionArguments, testedArguments) {
+                return typeCondition(testedArgument, typeInput, index, conditionArguments, testedArguments);
             }
         };
     };
