@@ -128,47 +128,51 @@ var _checkCondition = __webpack_require__(5);
 
 var _checkCondition2 = _interopRequireDefault(_checkCondition);
 
-var _number = __webpack_require__(7);
+var _createType = __webpack_require__(7);
+
+var _createType2 = _interopRequireDefault(_createType);
+
+var _number = __webpack_require__(8);
 
 var _number2 = _interopRequireDefault(_number);
 
-var _string = __webpack_require__(8);
+var _string = __webpack_require__(9);
 
 var _string2 = _interopRequireDefault(_string);
 
-var _object = __webpack_require__(9);
+var _object = __webpack_require__(10);
 
 var _object2 = _interopRequireDefault(_object);
 
-var _array = __webpack_require__(10);
+var _array = __webpack_require__(11);
 
 var _array2 = _interopRequireDefault(_array);
 
-var _boolean = __webpack_require__(11);
+var _boolean = __webpack_require__(12);
 
 var _boolean2 = _interopRequireDefault(_boolean);
 
-var _function = __webpack_require__(12);
+var _function = __webpack_require__(13);
 
 var _function2 = _interopRequireDefault(_function);
 
-var _symbol = __webpack_require__(13);
+var _symbol = __webpack_require__(14);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _undefined = __webpack_require__(14);
+var _undefined = __webpack_require__(15);
 
 var _undefined2 = _interopRequireDefault(_undefined);
 
-var _instance = __webpack_require__(15);
+var _instance = __webpack_require__(16);
 
 var _instance2 = _interopRequireDefault(_instance);
 
-var _null = __webpack_require__(16);
+var _null = __webpack_require__(17);
 
 var _null2 = _interopRequireDefault(_null);
 
-var _any = __webpack_require__(17);
+var _any = __webpack_require__(18);
 
 var _any2 = _interopRequireDefault(_any);
 
@@ -177,14 +181,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function createType(typeCondition) {
-    return function (input) {
-        return { execute: function execute(arg) {
-                return typeCondition(arg, input);
-            } };
-    };
-}
 
 var Overload = function () {
     _createClass(Overload, null, [{
@@ -292,17 +288,17 @@ var Overload = function () {
     return Overload;
 }();
 
-Overload.NUMBER = createType(_number2.default);
-Overload.STRING = createType(_string2.default);
-Overload.OBJECT = createType(_object2.default);
-Overload.ARRAY = createType(_array2.default);
-Overload.BOOLEAN = createType(_boolean2.default);
-Overload.FUNCTION = createType(_function2.default);
-Overload.SYMBOL = createType(_symbol2.default);
-Overload.UNDEFINED = createType(_undefined2.default);
-Overload.NULL = createType(_null2.default);
-Overload.ANY = createType(_any2.default);
-Overload.INSTANCE = createType(_instance2.default);
+Overload.NUMBER = (0, _createType2.default)(_number2.default);
+Overload.STRING = (0, _createType2.default)(_string2.default);
+Overload.OBJECT = (0, _createType2.default)(_object2.default);
+Overload.ARRAY = (0, _createType2.default)(_array2.default);
+Overload.BOOLEAN = (0, _createType2.default)(_boolean2.default);
+Overload.FUNCTION = (0, _createType2.default)(_function2.default);
+Overload.SYMBOL = (0, _createType2.default)(_symbol2.default);
+Overload.UNDEFINED = (0, _createType2.default)(_undefined2.default);
+Overload.NULL = (0, _createType2.default)(_null2.default);
+Overload.ANY = (0, _createType2.default)(_any2.default);
+Overload.INSTANCE = (0, _createType2.default)(_instance2.default);
 exports.default = Overload;
 
 /***/ }),
@@ -402,6 +398,27 @@ function elseConditionArgument(conditionArgument, testedArgument) {
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = createType;
+function createType(typeCondition) {
+    return function (typeInput) {
+        return {
+            execute: function execute(testedArgument) {
+                return typeCondition(testedArgument, typeInput);
+            }
+        };
+    };
+}
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -410,7 +427,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -425,7 +442,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -442,7 +459,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -459,7 +476,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -474,7 +491,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -489,7 +506,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -506,7 +523,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -521,7 +538,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -536,7 +553,7 @@ exports.default = function (arg, targetClass) {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -551,7 +568,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

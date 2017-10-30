@@ -1,5 +1,6 @@
 import debug from "debug";
 import checkCondition from "./checkCondition";
+import createType from "./createType";
 
 import numberCondition from "./types/number";
 import stringCondition from "./types/string";
@@ -12,10 +13,6 @@ import undefinedCondition from "./types/undefined";
 import instanceCondition from "./types/instance";
 import nullCondition from "./types/null";
 import anyCondition from "./types/any";
-
-function createType(typeCondition) {
-    return input => ({ execute: arg => typeCondition(arg, input) });
-}
 
 export default class Overload {
     static NUMBER = createType(numberCondition);
