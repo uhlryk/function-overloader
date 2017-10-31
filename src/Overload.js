@@ -1,6 +1,6 @@
 import debug from "debug";
 import checkCondition from "./checkCondition";
-import createType from "./createType";
+import createTypeFactory from "./createTypeFactory";
 
 import numberCondition from "./types/number";
 import stringCondition from "./types/string";
@@ -15,17 +15,17 @@ import nullCondition from "./types/null";
 import anyCondition from "./types/any";
 
 export default class Overload {
-    static NUMBER = createType(numberCondition);
-    static STRING = createType(stringCondition);
-    static OBJECT = createType(objectCondition);
-    static ARRAY = createType(arrayCondition);
-    static BOOLEAN = createType(booleanCondition);
-    static FUNCTION = createType(functionCondition);
-    static SYMBOL = createType(symbolCondition);
-    static UNDEFINED = createType(undefinedCondition);
-    static NULL = createType(nullCondition);
-    static ANY = createType(anyCondition);
-    static INSTANCE = createType(instanceCondition);
+    static NUMBER = createTypeFactory(numberCondition);
+    static STRING = createTypeFactory(stringCondition);
+    static OBJECT = createTypeFactory(objectCondition);
+    static ARRAY = createTypeFactory(arrayCondition);
+    static BOOLEAN = createTypeFactory(booleanCondition);
+    static FUNCTION = createTypeFactory(functionCondition);
+    static SYMBOL = createTypeFactory(symbolCondition);
+    static UNDEFINED = createTypeFactory(undefinedCondition);
+    static NULL = createTypeFactory(nullCondition);
+    static ANY = createTypeFactory(anyCondition);
+    static INSTANCE = createTypeFactory(instanceCondition);
 
     static set() {
         return new Overload(...arguments);

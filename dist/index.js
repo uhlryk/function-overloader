@@ -128,9 +128,9 @@ var _checkCondition = __webpack_require__(5);
 
 var _checkCondition2 = _interopRequireDefault(_checkCondition);
 
-var _createType = __webpack_require__(7);
+var _createTypeFactory = __webpack_require__(7);
 
-var _createType2 = _interopRequireDefault(_createType);
+var _createTypeFactory2 = _interopRequireDefault(_createTypeFactory);
 
 var _number = __webpack_require__(8);
 
@@ -288,17 +288,17 @@ var Overload = function () {
     return Overload;
 }();
 
-Overload.NUMBER = (0, _createType2.default)(_number2.default);
-Overload.STRING = (0, _createType2.default)(_string2.default);
-Overload.OBJECT = (0, _createType2.default)(_object2.default);
-Overload.ARRAY = (0, _createType2.default)(_array2.default);
-Overload.BOOLEAN = (0, _createType2.default)(_boolean2.default);
-Overload.FUNCTION = (0, _createType2.default)(_function2.default);
-Overload.SYMBOL = (0, _createType2.default)(_symbol2.default);
-Overload.UNDEFINED = (0, _createType2.default)(_undefined2.default);
-Overload.NULL = (0, _createType2.default)(_null2.default);
-Overload.ANY = (0, _createType2.default)(_any2.default);
-Overload.INSTANCE = (0, _createType2.default)(_instance2.default);
+Overload.NUMBER = (0, _createTypeFactory2.default)(_number2.default);
+Overload.STRING = (0, _createTypeFactory2.default)(_string2.default);
+Overload.OBJECT = (0, _createTypeFactory2.default)(_object2.default);
+Overload.ARRAY = (0, _createTypeFactory2.default)(_array2.default);
+Overload.BOOLEAN = (0, _createTypeFactory2.default)(_boolean2.default);
+Overload.FUNCTION = (0, _createTypeFactory2.default)(_function2.default);
+Overload.SYMBOL = (0, _createTypeFactory2.default)(_symbol2.default);
+Overload.UNDEFINED = (0, _createTypeFactory2.default)(_undefined2.default);
+Overload.NULL = (0, _createTypeFactory2.default)(_null2.default);
+Overload.ANY = (0, _createTypeFactory2.default)(_any2.default);
+Overload.INSTANCE = (0, _createTypeFactory2.default)(_instance2.default);
 exports.default = Overload;
 
 /***/ }),
