@@ -8,7 +8,7 @@
     "prettier-changed": "git diff --name-only HEAD | grep \".*\\.js$\" | xargs prettier --config .prettierrc --write",
     "test": "mocha --require source-map-support --require babel-register --require babel-polyfill --require init.mocha.js --check-leaks --timeout 3000 'src/**/*.spec.js'",
     "coverage": "istanbul cover -x 'src/**/*.spec.js' ./node_modules/.bin/_mocha -- --require source-map-support --require babel-register --require babel-polyfill --require init.mocha.js --check-leaks --timeout 3000 'src/**/*.spec.js' && open coverage/lcov-report/index.html",
-    "complexity": "plato -r --eslint .eslintrc -d report src && open report/index.html",
+    "complexity": "plato -r --eslint .eslintrc --exclude .spec.js -d report src && open report/index.html",
     "linter": "eslint src",
     "precommit": "lint-staged && npm run build && git add dist/ && npm run linter && npm test",
     "build": "webpack --config webpack.babel.js",
