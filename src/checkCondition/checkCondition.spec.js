@@ -1,4 +1,4 @@
-import Overload from "./Overload";
+import Overload from "../Overload";
 import checkCondition from "./checkCondition";
 
 describe("checkCondition", () => {

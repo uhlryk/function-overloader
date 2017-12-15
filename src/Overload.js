@@ -1,5 +1,6 @@
 import debug from "debug";
-import checkCondition from "./checkCondition";
+import checkCondition from "./checkCondition/checkCondition";
+import createDoneAction from "./actions/createDoneAction";
 import createTypeFactory from "./createTypeFactory";
 
 import numberCondition from "./types/number";
@@ -43,7 +44,6 @@ export default class Overload {
         this.when = this.when.bind(this);
         this.else = this.else.bind(this);
         this.elseThrow = this.elseThrow.bind(this);
-        this.done = this.done.bind(this);
     }
 
     /**
@@ -71,7 +71,7 @@ export default class Overload {
                     when: this.when,
                     else: this.else,
                     elseThrow: this.elseThrow,
-                    done: this.done
+                    done: createDoneAction(this._result)
                 };
             }
         };
@@ -87,7 +87,7 @@ export default class Overload {
             this._result = result;
         }
         return {
-            done: this.done
+            done: createDoneAction(this._result)
         };
     }
 
@@ -98,15 +98,7 @@ export default class Overload {
             throw TypeError("Wrong parameters", this._args);
         }
         return {
-            done: this.done
+            done: createDoneAction(this._result)
         };
-    }
-
-    /**
-   * Should be called at the end. It will return result from called use callback
-   * @returns {*}
-   */
-    done() {
-        return this._result;
     }
 }
