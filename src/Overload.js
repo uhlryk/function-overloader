@@ -1,5 +1,6 @@
 import debug from "debug";
 import checkCondition from "./checkCondition/checkCondition";
+import createElseAction from "./actions/createElseAction";
 import createDoneAction from "./actions/createDoneAction";
 import createTypeFactory from "./createTypeFactory";
 
@@ -42,7 +43,6 @@ export default class Overload {
         this._result = null;
 
         this.when = this.when.bind(this);
-        this.else = this.else.bind(this);
         this.elseThrow = this.elseThrow.bind(this);
     }
 
@@ -69,25 +69,16 @@ export default class Overload {
                 }
                 return {
                     when: this.when,
-                    else: this.else,
+                    else: createElseAction({
+                        testedArguments: this._args,
+                        isEnabled: this._enabled,
+                        result: this._result,
+                        debug: this._debug
+                    }),
                     elseThrow: this.elseThrow,
-                    done: createDoneAction(this._result)
+                    done: createDoneAction({ result: this._result, debug: this._debug })
                 };
             }
-        };
-    }
-
-    else(callback) {
-        this._debug("else");
-        if (this._enabled) {
-            this._debug("execute function");
-            this._enabled = false;
-            let result = callback(...this._args);
-            this._debug("function sync result", result);
-            this._result = result;
-        }
-        return {
-            done: createDoneAction(this._result)
         };
     }
 
@@ -98,7 +89,7 @@ export default class Overload {
             throw TypeError("Wrong parameters", this._args);
         }
         return {
-            done: createDoneAction(this._result)
+            done: createDoneAction({ result: this._result, debug: this._debug })
         };
     }
 }
