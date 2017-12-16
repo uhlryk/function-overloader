@@ -1,6 +1,7 @@
 import debug from "debug";
 import checkCondition from "./checkCondition/checkCondition";
 import createElseAction from "./actions/createElseAction";
+import createDoAction from "./actions/createDoAction";
 import createElseThrowAction from "./actions/createElseThrowAction";
 import createDoneAction from "./actions/createDoneAction";
 import createTypeFactory from "./createTypeFactory";
@@ -44,7 +45,6 @@ export default class Overload {
         this._result = null;
 
         this.when = this.when.bind(this);
-        this.elseThrow = this.elseThrow.bind(this);
     }
 
     /**
@@ -59,33 +59,14 @@ export default class Overload {
         let conditionResult = checkCondition(arguments, this._args);
         this._debug("result", conditionResult);
         return {
-            do: callback => {
-                this._debug("do");
-                if (conditionResult && this._enabled) {
-                    this._debug("execute function");
-                    this._enabled = false;
-                    let result = callback(...this._args);
-                    this._debug("function sync result", result);
-                    this._result = result;
-                }
-                return {
-                    when: this.when,
-                    else: createElseAction({
-                        testedArguments: this._args,
-                        isEnabled: this._enabled,
-                        result: this._result,
-                        debug: this._debug
-                    }),
-                    elseThrow: createElseThrowAction({
-                        testedArguments: this._args,
-                        isEnabled: this._enabled,
-                        result: this._result,
-                        debug: this._debug
-                    }),
-                    done: createDoneAction({ result: this._result, debug: this._debug })
-                };
-            }
+            do: createDoAction({
+                conditionResult,
+                testedArguments: this._args,
+                isEnabled: this._enabled,
+                result: this._result,
+                debug: this._debug
+            })
         };
     }
-    
+
 }
