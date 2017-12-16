@@ -1,6 +1,7 @@
 import debug from "debug";
 import checkCondition from "./checkCondition/checkCondition";
 import createElseAction from "./actions/createElseAction";
+import createElseThrowAction from "./actions/createElseThrowAction";
 import createDoneAction from "./actions/createDoneAction";
 import createTypeFactory from "./createTypeFactory";
 
@@ -75,21 +76,16 @@ export default class Overload {
                         result: this._result,
                         debug: this._debug
                     }),
-                    elseThrow: this.elseThrow,
+                    elseThrow: createElseThrowAction({
+                        testedArguments: this._args,
+                        isEnabled: this._enabled,
+                        result: this._result,
+                        debug: this._debug
+                    }),
                     done: createDoneAction({ result: this._result, debug: this._debug })
                 };
             }
         };
     }
-
-    elseThrow() {
-        this._debug("elseThrow");
-        if (this._enabled) {
-            this._enabled = false;
-            throw TypeError("Wrong parameters", this._args);
-        }
-        return {
-            done: createDoneAction({ result: this._result, debug: this._debug })
-        };
-    }
+    
 }
