@@ -5,7 +5,7 @@ export default function createElseAcion({ testedArguments, result, isEnabled, de
         if (isEnabled) {
             debug("execute function");
             isEnabled = false;
-            let result = callback(...testedArguments);
+            result = callback(...testedArguments);
             debug("function sync result", result);
         }
         return {

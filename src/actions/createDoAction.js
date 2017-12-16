@@ -1,9 +1,10 @@
 import createElseAction from "./createElseAction";
+import createWhenAction from "./createWhenAction";
 import createElseThrowAction from "./createElseThrowAction";
 import createDoneAction from "./createDoneAction";
 export default function createDoAcion({ testedArguments, result, conditionResult, isEnabled, debug }) {
     return callback => {
-        debug("do");
+        debug("call do");
         if (conditionResult && isEnabled) {
             debug("execute function");
             isEnabled = false;
@@ -11,7 +12,12 @@ export default function createDoAcion({ testedArguments, result, conditionResult
             debug("function sync result", result);
         }
         return {
-            when: this.when,
+            when: createWhenAction({
+                testedArguments,
+                isEnabled,
+                result,
+                debug
+            }),
             else: createElseAction({
                 testedArguments,
                 isEnabled,

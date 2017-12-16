@@ -1,4 +1,6 @@
 export default function createDoneAcion({ result, debug }) {
-    debug("call done with result", result);
-    return () => result;
+    return () => {
+        debug("call done with result", result);
+        return result;
+    };
 }

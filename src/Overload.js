@@ -1,7 +1,7 @@
-import debug from "debug";
-import checkCondition from "./checkCondition/checkCondition";
+import createDebug from "debug";
+
 import createElseAction from "./actions/createElseAction";
-import createDoAction from "./actions/createDoAction";
+import createWhenAction from "./actions/createWhenAction";
 import createElseThrowAction from "./actions/createElseThrowAction";
 import createDoneAction from "./actions/createDoneAction";
 import createTypeFactory from "./createTypeFactory";
@@ -31,42 +31,30 @@ export default class Overload {
     static ANY = createTypeFactory(anyCondition);
     static INSTANCE = createTypeFactory(instanceCondition);
 
-    static set() {
-        return new Overload(...arguments);
-    }
-    /**
-   * @param {any} args any arguments which overloaded function get
-   */
-    constructor() {
-        this._debug = debug("overloader");
-        this._args = Array.from(arguments);
-        this._debug("constructor get arguments ", this._args);
-        this._enabled = true;
-        this._result = null;
-
-        this.when = this.when.bind(this);
-    }
-
-    /**
-   * accept any number of arguments
-   * each argument can be :
-   *  * string - which check it type of tested argument is equal to this value
-   *  * function - which will be called with tested argument and list with all arguments. True means that this is expected argument
-   * @returns {{then}|*}
-   */
-    when() {
-        this._debug("when", Array.from(arguments));
-        let conditionResult = checkCondition(arguments, this._args);
-        this._debug("result", conditionResult);
+    static set(...testedArguments) {
+        let isEnabled = true;
+        let result = null;
+        let debug = createDebug("Overloader");
         return {
-            do: createDoAction({
-                conditionResult,
-                testedArguments: this._args,
-                isEnabled: this._enabled,
-                result: this._result,
-                debug: this._debug
-            })
+            when: createWhenAction({
+                testedArguments,
+                isEnabled,
+                result,
+                debug
+            }),
+            else: createElseAction({
+                testedArguments,
+                isEnabled,
+                result,
+                debug
+            }),
+            elseThrow: createElseThrowAction({
+                testedArguments,
+                isEnabled,
+                result,
+                debug
+            }),
+            done: createDoneAction({ result, debug })
         };
     }
-
 }
