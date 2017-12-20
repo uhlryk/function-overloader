@@ -146,11 +146,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createWhenAction;
 
-var _checkCondition = __webpack_require__(9);
+var _checkCondition = __webpack_require__(10);
 
 var _checkCondition2 = _interopRequireDefault(_checkCondition);
 
-var _createDoAction = __webpack_require__(11);
+var _createDoAction = __webpack_require__(12);
 
 var _createDoAction2 = _interopRequireDefault(_createDoAction);
 
@@ -269,67 +269,55 @@ var _debug = __webpack_require__(8);
 
 var _debug2 = _interopRequireDefault(_debug);
 
-var _createElseAction = __webpack_require__(1);
+var _createSetAction = __webpack_require__(9);
 
-var _createElseAction2 = _interopRequireDefault(_createElseAction);
+var _createSetAction2 = _interopRequireDefault(_createSetAction);
 
-var _createWhenAction = __webpack_require__(2);
-
-var _createWhenAction2 = _interopRequireDefault(_createWhenAction);
-
-var _createElseThrowAction = __webpack_require__(3);
-
-var _createElseThrowAction2 = _interopRequireDefault(_createElseThrowAction);
-
-var _createDoneAction = __webpack_require__(0);
-
-var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
-
-var _createTypeFactory = __webpack_require__(12);
+var _createTypeFactory = __webpack_require__(13);
 
 var _createTypeFactory2 = _interopRequireDefault(_createTypeFactory);
 
-var _number = __webpack_require__(13);
+var _number = __webpack_require__(14);
 
 var _number2 = _interopRequireDefault(_number);
 
-var _string = __webpack_require__(14);
+var _string = __webpack_require__(15);
 
 var _string2 = _interopRequireDefault(_string);
 
-var _object = __webpack_require__(15);
+var _object = __webpack_require__(16);
 
 var _object2 = _interopRequireDefault(_object);
 
-var _array = __webpack_require__(16);
+var _array = __webpack_require__(17);
 
 var _array2 = _interopRequireDefault(_array);
 
-var _boolean = __webpack_require__(17);
+var _boolean = __webpack_require__(18);
 
 var _boolean2 = _interopRequireDefault(_boolean);
 
-var _function = __webpack_require__(18);
+var _function = __webpack_require__(19);
 
 var _function2 = _interopRequireDefault(_function);
 
-var _symbol = __webpack_require__(19);
+var _symbol = __webpack_require__(20);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _undefined = __webpack_require__(20);
+var _undefined = __webpack_require__(21);
 
 var _undefined2 = _interopRequireDefault(_undefined);
 
-var _instance = __webpack_require__(21);
+var _instance = __webpack_require__(22);
 
 var _instance2 = _interopRequireDefault(_instance);
 
-var _null = __webpack_require__(22);
+var _null = __webpack_require__(23);
 
 var _null2 = _interopRequireDefault(_null);
 
-var _any = __webpack_require__(23);
+var _any = __webpack_require__(24);
 
 var _any2 = _interopRequireDefault(_any);
 
@@ -352,27 +340,13 @@ var Overload = function () {
             var isEnabled = true;
             var result = null;
             var debug = (0, _debug2.default)("Overloader");
-            return {
-                when: (0, _createWhenAction2.default)({
-                    testedArguments: testedArguments,
-                    isEnabled: isEnabled,
-                    result: result,
-                    debug: debug
-                }),
-                else: (0, _createElseAction2.default)({
-                    testedArguments: testedArguments,
-                    isEnabled: isEnabled,
-                    result: result,
-                    debug: debug
-                }),
-                elseThrow: (0, _createElseThrowAction2.default)({
-                    testedArguments: testedArguments,
-                    isEnabled: isEnabled,
-                    result: result,
-                    debug: debug
-                }),
-                done: (0, _createDoneAction2.default)({ result: result, debug: debug })
-            };
+            var setAction = (0, _createSetAction2.default)({
+                testedArguments: testedArguments,
+                isEnabled: isEnabled,
+                result: result,
+                debug: debug
+            });
+            return setAction();
         }
     }]);
 
@@ -408,9 +382,71 @@ module.exports = require("debug");
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.default = createSetAction;
+
+var _createElseAction = __webpack_require__(1);
+
+var _createElseAction2 = _interopRequireDefault(_createElseAction);
+
+var _createWhenAction = __webpack_require__(2);
+
+var _createWhenAction2 = _interopRequireDefault(_createWhenAction);
+
+var _createElseThrowAction = __webpack_require__(3);
+
+var _createElseThrowAction2 = _interopRequireDefault(_createElseThrowAction);
+
+var _createDoneAction = __webpack_require__(0);
+
+var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createSetAction(_ref) {
+    var testedArguments = _ref.testedArguments,
+        result = _ref.result,
+        isEnabled = _ref.isEnabled,
+        debug = _ref.debug;
+
+    return function () {
+        debug("call set");
+        return {
+            when: (0, _createWhenAction2.default)({
+                testedArguments: testedArguments,
+                isEnabled: isEnabled,
+                result: result,
+                debug: debug
+            }),
+            else: (0, _createElseAction2.default)({
+                testedArguments: testedArguments,
+                isEnabled: isEnabled,
+                result: result,
+                debug: debug
+            }),
+            elseThrow: (0, _createElseThrowAction2.default)({
+                testedArguments: testedArguments,
+                isEnabled: isEnabled,
+                result: result,
+                debug: debug
+            }),
+            done: (0, _createDoneAction2.default)({ result: result, debug: debug })
+        };
+    };
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.default = checkCondition;
 
-var _checkTypeCondition = __webpack_require__(10);
+var _checkTypeCondition = __webpack_require__(11);
 
 var _checkTypeCondition2 = _interopRequireDefault(_checkTypeCondition);
 
@@ -427,7 +463,7 @@ function checkCondition(conditionArguments, testedArguments) {
 }
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -482,7 +518,7 @@ function elseConditionArgument(conditionArgument) {
 }
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -553,7 +589,7 @@ function createDoAcion(_ref) {
 }
 
 /***/ }),
-/* 12 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -574,7 +610,7 @@ function createType(typeCondition) {
 }
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -589,7 +625,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -604,7 +640,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -621,7 +657,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -638,7 +674,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -653,7 +689,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -668,7 +704,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -685,7 +721,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -700,7 +736,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -715,7 +751,7 @@ exports.default = function (arg, targetClass) {
 };
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -730,7 +766,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

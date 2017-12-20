@@ -1,11 +1,8 @@
 import createDebug from "debug";
 
-import createElseAction from "./actions/createElseAction";
-import createWhenAction from "./actions/createWhenAction";
-import createElseThrowAction from "./actions/createElseThrowAction";
-import createDoneAction from "./actions/createDoneAction";
-import createTypeFactory from "./createTypeFactory";
+import createSetAction from "./actions/createSetAction";
 
+import createTypeFactory from "./createTypeFactory";
 import numberCondition from "./types/number";
 import stringCondition from "./types/string";
 import objectCondition from "./types/object";
@@ -35,26 +32,12 @@ export default class Overload {
         let isEnabled = true;
         let result = null;
         let debug = createDebug("Overloader");
-        return {
-            when: createWhenAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            else: createElseAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            elseThrow: createElseThrowAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            done: createDoneAction({ result, debug })
-        };
+        let setAction = createSetAction({
+            testedArguments,
+            isEnabled,
+            result,
+            debug
+        });
+        return setAction();
     }
 }
