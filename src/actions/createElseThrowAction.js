@@ -1,5 +1,5 @@
 import createDoneAction from "./createDoneAction";
-export default function createElseThrowAcion({ testedArguments, result, isEnabled, debug }) {
+export default function createElseThrowAction({ testedArguments, result, isEnabled, debug }) {
     return () => {
         debug("call elseThrow");
         if (isEnabled) {

@@ -83,8 +83,8 @@ return /******/ (function(modules) { // webpackBootstrap
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = createDoneAcion;
-function createDoneAcion(_ref) {
+exports.default = createDoneAction;
+function createDoneAction(_ref) {
     var result = _ref.result,
         debug = _ref.debug;
 
@@ -104,7 +104,7 @@ function createDoneAcion(_ref) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = createElseAcion;
+exports.default = createElseAction;
 
 var _createDoneAction = __webpack_require__(0);
 
@@ -114,7 +114,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function createElseAcion(_ref) {
+function createElseAction(_ref) {
     var testedArguments = _ref.testedArguments,
         result = _ref.result,
         isEnabled = _ref.isEnabled,
@@ -192,7 +192,7 @@ function createWhenAction(_ref) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = createElseThrowAcion;
+exports.default = createElseThrowAction;
 
 var _createDoneAction = __webpack_require__(0);
 
@@ -200,7 +200,7 @@ var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function createElseThrowAcion(_ref) {
+function createElseThrowAction(_ref) {
     var testedArguments = _ref.testedArguments,
         result = _ref.result,
         isEnabled = _ref.isEnabled,
@@ -518,7 +518,7 @@ function elseConditionArgument(conditionArgument) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-exports.default = createDoAcion;
+exports.default = createDoAction;
 
 var _createElseAction = __webpack_require__(1);
 
@@ -540,7 +540,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-function createDoAcion(_ref) {
+function createDoAction(_ref) {
     var testedArguments = _ref.testedArguments,
         result = _ref.result,
         conditionResult = _ref.conditionResult,

@@ -2,7 +2,7 @@ import createElseAction from "./createElseAction";
 import createWhenAction from "./createWhenAction";
 import createElseThrowAction from "./createElseThrowAction";
 import createDoneAction from "./createDoneAction";
-export default function createDoAcion({ testedArguments, result, conditionResult, isEnabled, debug }) {
+export default function createDoAction({ testedArguments, result, conditionResult, isEnabled, debug }) {
     return callback => {
         debug("call do");
         if (conditionResult && isEnabled) {
