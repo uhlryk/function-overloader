@@ -410,26 +410,17 @@ function createSetAction(_ref) {
 
     return function () {
         debug("call set");
+        var options = {
+            testedArguments: testedArguments,
+            isEnabled: isEnabled,
+            result: result,
+            debug: debug
+        };
         return {
-            when: (0, _createWhenAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            else: (0, _createElseAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            elseThrow: (0, _createElseThrowAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            done: (0, _createDoneAction2.default)({ result: result, debug: debug })
+            when: (0, _createWhenAction2.default)(options),
+            else: (0, _createElseAction2.default)(options),
+            elseThrow: (0, _createElseThrowAction2.default)(options),
+            done: (0, _createDoneAction2.default)(options)
         };
     };
 }
@@ -564,26 +555,17 @@ function createDoAcion(_ref) {
             result = callback.apply(undefined, _toConsumableArray(testedArguments));
             debug("function sync result", result);
         }
+        var options = {
+            testedArguments: testedArguments,
+            isEnabled: isEnabled,
+            result: result,
+            debug: debug
+        };
         return {
-            when: (0, _createWhenAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            else: (0, _createElseAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            elseThrow: (0, _createElseThrowAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            }),
-            done: (0, _createDoneAction2.default)({ result: result, debug: debug })
+            when: (0, _createWhenAction2.default)(options),
+            else: (0, _createElseAction2.default)(options),
+            elseThrow: (0, _createElseThrowAction2.default)(options),
+            done: (0, _createDoneAction2.default)(options)
         };
     };
 }

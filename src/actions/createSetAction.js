@@ -5,26 +5,17 @@ import createDoneAction from "./createDoneAction";
 export default function createSetAction({ testedArguments, result, isEnabled, debug }) {
     return () => {
         debug("call set");
+        const options = {
+            testedArguments,
+            isEnabled,
+            result,
+            debug
+        };
         return {
-            when: createWhenAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            else: createElseAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            elseThrow: createElseThrowAction({
-                testedArguments,
-                isEnabled,
-                result,
-                debug
-            }),
-            done: createDoneAction({ result, debug })
+            when: createWhenAction(options),
+            else: createElseAction(options),
+            elseThrow: createElseThrowAction(options),
+            done: createDoneAction(options)
         };
     };
 }
