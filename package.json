@@ -48,11 +48,10 @@
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
     "istanbul": "^1.1.0-alpha.1",
-    "lint-staged": "^4.1.3",
+    "lint-staged": "^6.0.0",
     "mocha": "^3.4.2",
     "mongo-mock": "^2.4.0",
     "plato": "^1.7.0",
-    "pre-commit": "^1.2.2",
     "prettier": "^1.6.1",
     "sinon": "^2.3.6",
     "sinon-chai": "^2.13.0",
@@ -61,8 +60,7 @@
     "webpack2-externals-plugin": "^1.0.0"
   },
   "dependencies": {
-    "debug": "^3.0.1",
-    "husky": "^0.14.3"
+    "debug": "^3.0.1"
   },
   "lint-staged": {
     "*.js": [
