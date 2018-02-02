@@ -154,6 +154,15 @@ Possible values:
  * **Overload.SYMBOL** or **Overload.SYMBOL()** for symbols
  * **Overload.UNDEFINED** or **Overload.UNDEFINED()** for undefined
  * **Overload.NULL** or **Overload.NULL()** for null
+ * **Overload.INTERFACE** or **Overload.INTERFACE(interfaceOptions)** for checking if tested object has interface properties with correct types
+   interfaceOptions is an object with property names and description
+   example of interface
+   ```
+    interfaceOptions = {
+        someProperty: Overload.NUMBER,
+        otherProperty: Overload: STRING
+    }
+   ```
  * **Overload.INSTANCE(class)** check if argument instance of `class`
  
 if there is no arguments it means that it will resolve only when overloaded function doesn't get any arguments.  
