@@ -12,6 +12,7 @@ import functionCondition from "./types/function";
 import symbolCondition from "./types/symbol";
 import undefinedCondition from "./types/undefined";
 import instanceCondition from "./types/instance";
+import interfaceCondition from "./types/interface";
 import nullCondition from "./types/null";
 import anyCondition from "./types/any";
 
@@ -27,6 +28,7 @@ export default class Overload {
     static NULL = createTypeFactory(nullCondition);
     static ANY = createTypeFactory(anyCondition);
     static INSTANCE = createTypeFactory(instanceCondition);
+    static INTERFACE = createTypeFactory(interfaceCondition);
 
     static set(...testedArguments) {
         let isEnabled = true;

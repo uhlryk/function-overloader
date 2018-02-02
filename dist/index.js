@@ -7,7 +7,7 @@
 		var a = typeof exports === 'object' ? factory(require("babel-polyfill"), require("debug")) : factory(root["babel-polyfill"], root["debug"]);
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_8__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_9__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -146,7 +146,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createWhenAction;
 
-var _checkCondition = __webpack_require__(10);
+var _checkCondition = __webpack_require__(11);
 
 var _checkCondition2 = _interopRequireDefault(_checkCondition);
 
@@ -184,277 +184,6 @@ function createWhenAction(_ref) {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = createElseThrowAction;
-
-var _createDoneAction = __webpack_require__(0);
-
-var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function createElseThrowAction(_ref) {
-    var testedArguments = _ref.testedArguments,
-        result = _ref.result,
-        isEnabled = _ref.isEnabled,
-        debug = _ref.debug;
-
-    return function () {
-        debug("call elseThrow");
-        if (isEnabled) {
-            isEnabled = false;
-            throw TypeError("Wrong parameters", testedArguments);
-        }
-        return {
-            done: (0, _createDoneAction2.default)({ result: result, debug: debug })
-        };
-    };
-}
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(5);
-module.exports = __webpack_require__(6);
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-polyfill");
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = undefined;
-
-var _Overload = __webpack_require__(7);
-
-var _Overload2 = _interopRequireDefault(_Overload);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = _Overload2.default;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _debug = __webpack_require__(8);
-
-var _debug2 = _interopRequireDefault(_debug);
-
-var _createSetAction = __webpack_require__(9);
-
-var _createSetAction2 = _interopRequireDefault(_createSetAction);
-
-var _createTypeFactory = __webpack_require__(13);
-
-var _createTypeFactory2 = _interopRequireDefault(_createTypeFactory);
-
-var _number = __webpack_require__(14);
-
-var _number2 = _interopRequireDefault(_number);
-
-var _string = __webpack_require__(15);
-
-var _string2 = _interopRequireDefault(_string);
-
-var _object = __webpack_require__(16);
-
-var _object2 = _interopRequireDefault(_object);
-
-var _array = __webpack_require__(17);
-
-var _array2 = _interopRequireDefault(_array);
-
-var _boolean = __webpack_require__(18);
-
-var _boolean2 = _interopRequireDefault(_boolean);
-
-var _function = __webpack_require__(19);
-
-var _function2 = _interopRequireDefault(_function);
-
-var _symbol = __webpack_require__(20);
-
-var _symbol2 = _interopRequireDefault(_symbol);
-
-var _undefined = __webpack_require__(21);
-
-var _undefined2 = _interopRequireDefault(_undefined);
-
-var _instance = __webpack_require__(22);
-
-var _instance2 = _interopRequireDefault(_instance);
-
-var _null = __webpack_require__(23);
-
-var _null2 = _interopRequireDefault(_null);
-
-var _any = __webpack_require__(24);
-
-var _any2 = _interopRequireDefault(_any);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Overload = function () {
-    function Overload() {
-        _classCallCheck(this, Overload);
-    }
-
-    _createClass(Overload, null, [{
-        key: "set",
-        value: function set() {
-            for (var _len = arguments.length, testedArguments = Array(_len), _key = 0; _key < _len; _key++) {
-                testedArguments[_key] = arguments[_key];
-            }
-
-            var isEnabled = true;
-            var result = null;
-            var debug = (0, _debug2.default)("Overloader");
-            var setAction = (0, _createSetAction2.default)({
-                testedArguments: testedArguments,
-                isEnabled: isEnabled,
-                result: result,
-                debug: debug
-            });
-            return setAction();
-        }
-    }]);
-
-    return Overload;
-}();
-
-Overload.NUMBER = (0, _createTypeFactory2.default)(_number2.default);
-Overload.STRING = (0, _createTypeFactory2.default)(_string2.default);
-Overload.OBJECT = (0, _createTypeFactory2.default)(_object2.default);
-Overload.ARRAY = (0, _createTypeFactory2.default)(_array2.default);
-Overload.BOOLEAN = (0, _createTypeFactory2.default)(_boolean2.default);
-Overload.FUNCTION = (0, _createTypeFactory2.default)(_function2.default);
-Overload.SYMBOL = (0, _createTypeFactory2.default)(_symbol2.default);
-Overload.UNDEFINED = (0, _createTypeFactory2.default)(_undefined2.default);
-Overload.NULL = (0, _createTypeFactory2.default)(_null2.default);
-Overload.ANY = (0, _createTypeFactory2.default)(_any2.default);
-Overload.INSTANCE = (0, _createTypeFactory2.default)(_instance2.default);
-exports.default = Overload;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = require("debug");
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = createSetAction;
-
-var _createElseAction = __webpack_require__(1);
-
-var _createElseAction2 = _interopRequireDefault(_createElseAction);
-
-var _createWhenAction = __webpack_require__(2);
-
-var _createWhenAction2 = _interopRequireDefault(_createWhenAction);
-
-var _createElseThrowAction = __webpack_require__(3);
-
-var _createElseThrowAction2 = _interopRequireDefault(_createElseThrowAction);
-
-var _createDoneAction = __webpack_require__(0);
-
-var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function createSetAction(_ref) {
-    var testedArguments = _ref.testedArguments,
-        result = _ref.result,
-        isEnabled = _ref.isEnabled,
-        debug = _ref.debug;
-
-    return function () {
-        debug("call set");
-        var options = {
-            testedArguments: testedArguments,
-            isEnabled: isEnabled,
-            result: result,
-            debug: debug
-        };
-        return {
-            when: (0, _createWhenAction2.default)(options),
-            else: (0, _createElseAction2.default)(options),
-            elseThrow: (0, _createElseThrowAction2.default)(options),
-            done: (0, _createDoneAction2.default)(options)
-        };
-    };
-}
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.default = checkCondition;
-
-var _checkTypeCondition = __webpack_require__(11);
-
-var _checkTypeCondition2 = _interopRequireDefault(_checkTypeCondition);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function checkCondition(conditionArguments, testedArguments) {
-    if (conditionArguments.length === testedArguments.length) {
-        return conditionArguments.every(function (conditionArgument, index) {
-            var testedArgument = testedArguments[index];
-            return (0, _checkTypeCondition2.default)(conditionArgument, testedArgument, index, conditionArguments, testedArguments);
-        });
-    }
-    return false;
-}
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -509,6 +238,282 @@ function elseConditionArgument(conditionArgument) {
 }
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = createElseThrowAction;
+
+var _createDoneAction = __webpack_require__(0);
+
+var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createElseThrowAction(_ref) {
+    var testedArguments = _ref.testedArguments,
+        result = _ref.result,
+        isEnabled = _ref.isEnabled,
+        debug = _ref.debug;
+
+    return function () {
+        debug("call elseThrow");
+        if (isEnabled) {
+            isEnabled = false;
+            throw TypeError("Wrong parameters", testedArguments);
+        }
+        return {
+            done: (0, _createDoneAction2.default)({ result: result, debug: debug })
+        };
+    };
+}
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__(6);
+module.exports = __webpack_require__(7);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = require("babel-polyfill");
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _Overload = __webpack_require__(8);
+
+var _Overload2 = _interopRequireDefault(_Overload);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = _Overload2.default;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _debug = __webpack_require__(9);
+
+var _debug2 = _interopRequireDefault(_debug);
+
+var _createSetAction = __webpack_require__(10);
+
+var _createSetAction2 = _interopRequireDefault(_createSetAction);
+
+var _createTypeFactory = __webpack_require__(13);
+
+var _createTypeFactory2 = _interopRequireDefault(_createTypeFactory);
+
+var _number = __webpack_require__(14);
+
+var _number2 = _interopRequireDefault(_number);
+
+var _string = __webpack_require__(15);
+
+var _string2 = _interopRequireDefault(_string);
+
+var _object = __webpack_require__(16);
+
+var _object2 = _interopRequireDefault(_object);
+
+var _array = __webpack_require__(17);
+
+var _array2 = _interopRequireDefault(_array);
+
+var _boolean = __webpack_require__(18);
+
+var _boolean2 = _interopRequireDefault(_boolean);
+
+var _function = __webpack_require__(19);
+
+var _function2 = _interopRequireDefault(_function);
+
+var _symbol = __webpack_require__(20);
+
+var _symbol2 = _interopRequireDefault(_symbol);
+
+var _undefined = __webpack_require__(21);
+
+var _undefined2 = _interopRequireDefault(_undefined);
+
+var _instance = __webpack_require__(22);
+
+var _instance2 = _interopRequireDefault(_instance);
+
+var _interface = __webpack_require__(23);
+
+var _interface2 = _interopRequireDefault(_interface);
+
+var _null = __webpack_require__(25);
+
+var _null2 = _interopRequireDefault(_null);
+
+var _any = __webpack_require__(26);
+
+var _any2 = _interopRequireDefault(_any);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Overload = function () {
+    function Overload() {
+        _classCallCheck(this, Overload);
+    }
+
+    _createClass(Overload, null, [{
+        key: "set",
+        value: function set() {
+            for (var _len = arguments.length, testedArguments = Array(_len), _key = 0; _key < _len; _key++) {
+                testedArguments[_key] = arguments[_key];
+            }
+
+            var isEnabled = true;
+            var result = null;
+            var debug = (0, _debug2.default)("Overloader");
+            var setAction = (0, _createSetAction2.default)({
+                testedArguments: testedArguments,
+                isEnabled: isEnabled,
+                result: result,
+                debug: debug
+            });
+            return setAction();
+        }
+    }]);
+
+    return Overload;
+}();
+
+Overload.NUMBER = (0, _createTypeFactory2.default)(_number2.default);
+Overload.STRING = (0, _createTypeFactory2.default)(_string2.default);
+Overload.OBJECT = (0, _createTypeFactory2.default)(_object2.default);
+Overload.ARRAY = (0, _createTypeFactory2.default)(_array2.default);
+Overload.BOOLEAN = (0, _createTypeFactory2.default)(_boolean2.default);
+Overload.FUNCTION = (0, _createTypeFactory2.default)(_function2.default);
+Overload.SYMBOL = (0, _createTypeFactory2.default)(_symbol2.default);
+Overload.UNDEFINED = (0, _createTypeFactory2.default)(_undefined2.default);
+Overload.NULL = (0, _createTypeFactory2.default)(_null2.default);
+Overload.ANY = (0, _createTypeFactory2.default)(_any2.default);
+Overload.INSTANCE = (0, _createTypeFactory2.default)(_instance2.default);
+Overload.INTERFACE = (0, _createTypeFactory2.default)(_interface2.default);
+exports.default = Overload;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+module.exports = require("debug");
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = createSetAction;
+
+var _createElseAction = __webpack_require__(1);
+
+var _createElseAction2 = _interopRequireDefault(_createElseAction);
+
+var _createWhenAction = __webpack_require__(2);
+
+var _createWhenAction2 = _interopRequireDefault(_createWhenAction);
+
+var _createElseThrowAction = __webpack_require__(4);
+
+var _createElseThrowAction2 = _interopRequireDefault(_createElseThrowAction);
+
+var _createDoneAction = __webpack_require__(0);
+
+var _createDoneAction2 = _interopRequireDefault(_createDoneAction);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function createSetAction(_ref) {
+    var testedArguments = _ref.testedArguments,
+        result = _ref.result,
+        isEnabled = _ref.isEnabled,
+        debug = _ref.debug;
+
+    return function () {
+        debug("call set");
+        var options = {
+            testedArguments: testedArguments,
+            isEnabled: isEnabled,
+            result: result,
+            debug: debug
+        };
+        return {
+            when: (0, _createWhenAction2.default)(options),
+            else: (0, _createElseAction2.default)(options),
+            elseThrow: (0, _createElseThrowAction2.default)(options),
+            done: (0, _createDoneAction2.default)(options)
+        };
+    };
+}
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = checkCondition;
+
+var _checkTypeCondition = __webpack_require__(3);
+
+var _checkTypeCondition2 = _interopRequireDefault(_checkTypeCondition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function checkCondition(conditionArguments, testedArguments) {
+    if (conditionArguments.length === testedArguments.length) {
+        return conditionArguments.every(function (conditionArgument, index) {
+            var testedArgument = testedArguments[index];
+            return (0, _checkTypeCondition2.default)(conditionArgument, testedArgument, index, conditionArguments, testedArguments);
+        });
+    }
+    return false;
+}
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -528,7 +533,7 @@ var _createWhenAction = __webpack_require__(2);
 
 var _createWhenAction2 = _interopRequireDefault(_createWhenAction);
 
-var _createElseThrowAction = __webpack_require__(3);
+var _createElseThrowAction = __webpack_require__(4);
 
 var _createElseThrowAction2 = _interopRequireDefault(_createElseThrowAction);
 
@@ -740,6 +745,54 @@ exports.default = function (arg, targetClass) {
 
 
 Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _checkSingleCondition = __webpack_require__(24);
+
+var _checkSingleCondition2 = _interopRequireDefault(_checkSingleCondition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function (arg) {
+    var targetInterface = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    return (typeof arg === "undefined" ? "undefined" : _typeof(arg)) === "object" && Object.keys(targetInterface).every(function (key) {
+        return (0, _checkSingleCondition2.default)(targetInterface[key], arg[key]);
+    });
+};
+
+/***/ }),
+/* 24 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+exports.default = checkSingleCondition;
+
+var _checkTypeCondition = __webpack_require__(3);
+
+var _checkTypeCondition2 = _interopRequireDefault(_checkTypeCondition);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function checkSingleCondition(conditionArgument, testedArgument) {
+    return (0, _checkTypeCondition2.default)(conditionArgument, testedArgument, 1, [conditionArgument], [testedArgument]);
+}
+
+/***/ }),
+/* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
@@ -748,7 +801,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 24 */
+/* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";

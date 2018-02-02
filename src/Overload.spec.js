@@ -209,4 +209,30 @@ describe("Overload", () => {
                 expect(result).to.be.equal("correct result");
             });
     });
+
+    it("return correct response when expected interface", () => {
+        let result = Overload.set({
+            propertyString: "someString",
+            propertyNumber: 1234,
+            propertyFunction: () => {}
+        })
+            .when(
+                Overload.INTERFACE({
+                    propertyString: Overload.NUMBER,
+                    propertyNumber: Overload.NUMBER,
+                    propertyFunction: Overload.FUNCTION
+                })
+            )
+            .do(() => "wrong result")
+            .when(
+                Overload.INTERFACE({
+                    propertyString: Overload.STRING,
+                    propertyNumber: Overload.NUMBER,
+                    propertyFunction: Overload.FUNCTION
+                })
+            )
+            .do(() => "correct result")
+            .done();
+        expect(result).to.be.equal("correct result");
+    });
 });
