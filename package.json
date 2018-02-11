@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prettier-all": "prettier --config .prettierrc --write 'src/**/*.js'",
-    "prettier-changed": "git diff --name-status --diff-filter=ACMRTU HEAD | grep \".*\\.js$\" | xargs prettier --config .prettierrc --write",
+    "prettier-changed": "git diff --name-only --diff-filter=ACMRTU HEAD | grep \".*\\.js$\" | xargs prettier --config .prettierrc --write",
     "test": "mocha --require source-map-support --require babel-register --require babel-polyfill --require init.mocha.js --check-leaks --timeout 3000 'src/**/*.spec.js'",
     "coverage": "istanbul cover -x 'src/**/*.spec.js' ./node_modules/.bin/_mocha -- --require source-map-support --require babel-register --require babel-polyfill --require init.mocha.js --check-leaks --timeout 3000 'src/**/*.spec.js' && open coverage/lcov-report/index.html",
     "complexity": "plato -r --eslint .eslintrc --exclude .spec.js -d report src && open report/index.html",
