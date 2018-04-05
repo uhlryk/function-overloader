@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("babel-polyfill"), require("debug"));
+		module.exports = factory();
 	else if(typeof define === 'function' && define.amd)
-		define(["babel-polyfill", "debug"], factory);
+		define([], factory);
 	else {
-		var a = typeof exports === 'object' ? factory(require("babel-polyfill"), require("debug")) : factory(root["babel-polyfill"], root["debug"]);
+		var a = factory();
 		for(var i in a) (typeof exports === 'object' ? exports : root)[i] = a[i];
 	}
-})(this, function(__WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_9__) {
+})(typeof self !== 'undefined' ? self : this, function() {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -146,11 +146,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = createWhenAction;
 
-var _checkCondition = __webpack_require__(11);
+var _checkCondition = __webpack_require__(10);
 
 var _checkCondition2 = _interopRequireDefault(_checkCondition);
 
-var _createDoAction = __webpack_require__(12);
+var _createDoAction = __webpack_require__(11);
 
 var _createDoAction2 = _interopRequireDefault(_createDoAction);
 
@@ -277,18 +277,11 @@ function createElseThrowAction(_ref) {
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(6);
-module.exports = __webpack_require__(7);
+module.exports = __webpack_require__(6);
 
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("babel-polyfill");
-
-/***/ }),
-/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -299,7 +292,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = undefined;
 
-var _Overload = __webpack_require__(8);
+var _Overload = __webpack_require__(7);
 
 var _Overload2 = _interopRequireDefault(_Overload);
 
@@ -308,7 +301,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 exports.default = _Overload2.default;
 
 /***/ }),
-/* 8 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -320,63 +313,63 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _debug = __webpack_require__(9);
+var _debug = __webpack_require__(8);
 
 var _debug2 = _interopRequireDefault(_debug);
 
-var _createSetAction = __webpack_require__(10);
+var _createSetAction = __webpack_require__(9);
 
 var _createSetAction2 = _interopRequireDefault(_createSetAction);
 
-var _createTypeFactory = __webpack_require__(13);
+var _createTypeFactory = __webpack_require__(12);
 
 var _createTypeFactory2 = _interopRequireDefault(_createTypeFactory);
 
-var _number = __webpack_require__(14);
+var _number = __webpack_require__(13);
 
 var _number2 = _interopRequireDefault(_number);
 
-var _string = __webpack_require__(15);
+var _string = __webpack_require__(14);
 
 var _string2 = _interopRequireDefault(_string);
 
-var _object = __webpack_require__(16);
+var _object = __webpack_require__(15);
 
 var _object2 = _interopRequireDefault(_object);
 
-var _array = __webpack_require__(17);
+var _array = __webpack_require__(16);
 
 var _array2 = _interopRequireDefault(_array);
 
-var _boolean = __webpack_require__(18);
+var _boolean = __webpack_require__(17);
 
 var _boolean2 = _interopRequireDefault(_boolean);
 
-var _function = __webpack_require__(19);
+var _function = __webpack_require__(18);
 
 var _function2 = _interopRequireDefault(_function);
 
-var _symbol = __webpack_require__(20);
+var _symbol = __webpack_require__(19);
 
 var _symbol2 = _interopRequireDefault(_symbol);
 
-var _undefined = __webpack_require__(21);
+var _undefined = __webpack_require__(20);
 
 var _undefined2 = _interopRequireDefault(_undefined);
 
-var _instance = __webpack_require__(22);
+var _instance = __webpack_require__(21);
 
 var _instance2 = _interopRequireDefault(_instance);
 
-var _interface = __webpack_require__(23);
+var _interface = __webpack_require__(22);
 
 var _interface2 = _interopRequireDefault(_interface);
 
-var _null = __webpack_require__(25);
+var _null = __webpack_require__(24);
 
 var _null2 = _interopRequireDefault(_null);
 
-var _any = __webpack_require__(26);
+var _any = __webpack_require__(25);
 
 var _any2 = _interopRequireDefault(_any);
 
@@ -427,13 +420,13 @@ Overload.INTERFACE = (0, _createTypeFactory2.default)(_interface2.default);
 exports.default = Overload;
 
 /***/ }),
-/* 9 */
+/* 8 */
 /***/ (function(module, exports) {
 
 module.exports = require("debug");
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -486,7 +479,7 @@ function createSetAction(_ref) {
 }
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -514,7 +507,7 @@ function checkCondition(conditionArguments, testedArguments) {
 }
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -576,7 +569,7 @@ function createDoAction(_ref) {
 }
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -597,7 +590,7 @@ function createType(typeCondition) {
 }
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -612,7 +605,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -627,7 +620,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -644,7 +637,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -661,7 +654,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -676,7 +669,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -691,7 +684,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -708,7 +701,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -723,7 +716,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -738,7 +731,7 @@ exports.default = function (arg, targetClass) {
 };
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -750,7 +743,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-var _checkSingleCondition = __webpack_require__(24);
+var _checkSingleCondition = __webpack_require__(23);
 
 var _checkSingleCondition2 = _interopRequireDefault(_checkSingleCondition);
 
@@ -764,7 +757,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -786,7 +779,7 @@ function checkSingleCondition(conditionArgument, testedArgument) {
 }
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -801,7 +794,7 @@ exports.default = function (arg) {
 };
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
