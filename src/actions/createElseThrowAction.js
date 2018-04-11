@@ -1,13 +1,14 @@
-import createDoneAction from "./createDoneAction";
-export default function createElseThrowAction({ testedArguments, result, isEnabled, debug }) {
+import createExecuteAction from "./createExecuteAction";
+export default function createElseThrowAction(actions) {
+    const newActions = actions.slice();
     return () => {
-        debug("call elseThrow");
-        if (isEnabled) {
-            isEnabled = false;
-            throw TypeError("Wrong parameters", testedArguments);
-        }
+        newActions.push({
+            callback(...testedArguments) {
+                throw TypeError("Wrong parameters", testedArguments);
+            }
+        });
         return {
-            done: createDoneAction({ result, debug })
+            execute: createExecuteAction(newActions)
         };
     };
 }

@@ -1,6 +1,4 @@
-import createDebug from "debug";
-
-import createSetAction from "./actions/createSetAction";
+import createWhenAction from "./actions/createWhenAction";
 
 import createTypeFactory from "./createTypeFactory";
 import numberCondition from "./types/number";
@@ -30,16 +28,9 @@ export default class Overload {
     static INSTANCE = createTypeFactory(instanceCondition);
     static INTERFACE = createTypeFactory(interfaceCondition);
 
-    static set(...testedArguments) {
-        let isEnabled = true;
-        let result = null;
-        let debug = createDebug("Overloader");
-        let setAction = createSetAction({
-            testedArguments,
-            isEnabled,
-            result,
-            debug
-        });
-        return setAction();
+    static when(...conditionArguments) {
+        let actions = [];
+        let whenAction = createWhenAction(actions);
+        return whenAction(conditionArguments);
     }
 }

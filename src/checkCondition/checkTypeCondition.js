@@ -25,6 +25,7 @@ function functionConditionArgument(conditionArgument, testedArgument, index, con
 }
 
 function objectConditionArgument(conditionArgument, testedArgument, index, conditionArguments, testedArguments) {
+    console.log(arguments);
     return {
         execute() {
             return conditionArgument.execute(testedArgument, index, conditionArguments, testedArguments);

@@ -1,15 +1,12 @@
-import createDoneAction from "./createDoneAction";
-export default function createElseAction({ testedArguments, result, isEnabled, debug }) {
+import createExecuteAction from "./createExecuteAction";
+export default function createElseAction(actions) {
+    const newActions = actions.slice();
     return callback => {
-        debug("call else");
-        if (isEnabled) {
-            debug("execute function");
-            isEnabled = false;
-            result = callback(...testedArguments);
-            debug("function sync result", result);
-        }
+        newActions.push({
+            callback
+        });
         return {
-            done: createDoneAction({ result, debug })
+            execute: createExecuteAction(actions)
         };
     };
 }
