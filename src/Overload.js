@@ -31,6 +31,6 @@ export default class Overload {
     static when(...conditionArguments) {
         let actions = [];
         let whenAction = createWhenAction(actions);
-        return whenAction(conditionArguments);
+        return whenAction(...conditionArguments);
     }
 }

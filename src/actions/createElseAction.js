@@ -6,7 +6,7 @@ export default function createElseAction(actions) {
             callback
         });
         return {
-            execute: createExecuteAction(actions)
+            execute: createExecuteAction(newActions)
         };
     };
 }

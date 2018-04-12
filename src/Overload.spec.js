@@ -12,9 +12,7 @@ describe("Overload", () => {
     });
 
     it("ensure that 'do' method return object with 'when' & 'else' & 'elseThrow' & 'execute' methods", () => {
-        let doMethodResult = Overload
-            .when()
-            .do(() => {});
+        let doMethodResult = Overload.when().do(() => {});
         expect(doMethodResult).to.have.property("when");
         expect(doMethodResult).to.have.property("else");
         expect(doMethodResult).to.have.property("elseThrow");
@@ -23,7 +21,9 @@ describe("Overload", () => {
     });
 
     it("ensure that 'else' method return only object with 'execute' method", () => {
-        let elseMethodResult = Overload.when().do(() => {}).else(() => {});
+        let elseMethodResult = Overload.when()
+            .do(() => {})
+            .else(() => {});
         expect(elseMethodResult).to.have.property("execute");
         expect(elseMethodResult).to.not.have.property("when");
         expect(elseMethodResult).to.not.have.property("else");
@@ -32,7 +32,9 @@ describe("Overload", () => {
     });
 
     it("ensure that 'elseThrow' method return only object with 'execute' method", () => {
-        let elseMethodResult = Overload.when().do(() => {}).else(() => {});
+        let elseMethodResult = Overload.when()
+            .do(() => {})
+            .else(() => {});
         expect(elseMethodResult).to.have.property("execute");
         expect(elseMethodResult).to.not.have.property("when");
         expect(elseMethodResult).to.not.have.property("else");
@@ -41,13 +43,14 @@ describe("Overload", () => {
     });
 
     it("ensure that 'execute' method return response", () => {
-        let executeMethodResult = Overload.when().do(()=>{}).execute();
+        let executeMethodResult = Overload.when()
+            .do(() => null)
+            .execute();
         expect(executeMethodResult).to.be.null();
     });
 
     it("return sync result for typeof tests", () => {
-        let result = Overload
-            .when(Overload.NUMBER, Overload.STRING)
+        let result = Overload.when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when(Overload.STRING, Overload.NUMBER)
             .do(() => "correct result")
@@ -58,70 +61,59 @@ describe("Overload", () => {
     });
 
     it("resolved to correct types", () => {
-        let result = Overload
-            .when(Overload.STRING)
+        let result = Overload.when(Overload.STRING)
             .do(() => "correct string")
             .execute("someString");
         expect(result).to.be.equal("correct string");
 
-        result = Overload
-            .when(Overload.NUMBER)
+        result = Overload.when(Overload.NUMBER)
             .do(() => "correct number")
             .execute(1234);
         expect(result).to.be.equal("correct number");
 
-        result = Overload
-            .when(Overload.BOOLEAN)
+        result = Overload.when(Overload.BOOLEAN)
             .do(() => "correct bool")
             .execute(true);
         expect(result).to.be.equal("correct bool");
 
-        result = Overload
-            .when(Overload.FUNCTION)
+        result = Overload.when(Overload.FUNCTION)
             .do(() => "correct function")
             .execute(() => {});
         expect(result).to.be.equal("correct function");
 
-        result = Overload
-            .when(Overload.OBJECT)
+        result = Overload.when(Overload.OBJECT)
             .do(() => "correct object")
             .execute({});
         expect(result).to.be.equal("correct object");
 
-        result = Overload
-            .when(Overload.ARRAY)
+        result = Overload.when(Overload.ARRAY)
             .do(() => "correct object")
             .execute([]);
         expect(result).to.be.equal("correct object");
 
-        result = Overload
-            .when(Overload.NULL)
+        result = Overload.when(Overload.NULL)
             .do(() => "correct object")
             .execute(null);
         expect(result).to.be.equal("correct object");
 
-        result = Overload
-            .when(Overload.SYMBOL)
+        result = Overload.when(Overload.SYMBOL)
             .do(() => "correct symbol")
             .execute(Symbol("test"));
         expect(result).to.be.equal("correct symbol");
 
-        result = Overload
-            .when(Overload.UNDEFINED)
+        result = Overload.when(Overload.UNDEFINED)
             .do(() => "correct undefined")
             .execute(undefined);
         expect(result).to.be.equal("correct undefined");
 
-        result = Overload
-            .when(Overload.ANY)
+        result = Overload.when(Overload.ANY)
             .do(() => "correct undefined")
             .execute("test");
         expect(result).to.be.equal("correct undefined");
     });
 
     it("return correct response when expected undefined as argument", () => {
-        let result = Overload
-            .when(Overload.NUMBER, Overload.STRING)
+        let result = Overload.when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when(Overload.UNDEFINED, Overload.NUMBER)
             .do(() => "correct result")
@@ -132,8 +124,7 @@ describe("Overload", () => {
     });
 
     it("return correct response when expected no arguments", () => {
-        let result = Overload
-            .when(Overload.NUMBER, Overload.STRING)
+        let result = Overload.when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when()
             .do(() => "correct result")
@@ -142,8 +133,7 @@ describe("Overload", () => {
             .execute();
         expect(result).to.be.equal("correct result");
 
-        result = Overload
-            .when(Overload.UNDEFINED, Overload.UNDEFINED)
+        result = Overload.when(Overload.UNDEFINED, Overload.UNDEFINED)
             .do(() => "wrong resultAA")
             .when()
             .do(() => "correct result")
@@ -154,8 +144,7 @@ describe("Overload", () => {
     });
 
     it("invoke else and correct response when no condition met", () => {
-        let result = Overload
-            .when(Overload.NUMBER, Overload.STRING)
+        let result = Overload.when(Overload.NUMBER, Overload.STRING)
             .do(() => "wrong result")
             .when()
             .do(() => "wrong result")
@@ -168,8 +157,7 @@ describe("Overload", () => {
 
     it("invoke elseThrow when no condition met", () => {
         expect(() => {
-            Overload
-                .when(Overload.NUMBER, Overload.STRING)
+            Overload.when(Overload.NUMBER, Overload.STRING)
                 .do(() => "wrong result")
                 .when()
                 .do(() => "wrong result")
@@ -185,8 +173,7 @@ describe("Overload", () => {
         class Test2 {}
 
         const test1 = new Test1();
-        let result = Overload
-            .when(Overload.NUMBER, Overload.INSTANCE(Test2))
+        let result = Overload.when(Overload.NUMBER, Overload.INSTANCE(Test2))
             .do(() => "wrong result")
             .when(Overload.STRING, Overload.INSTANCE(Test1))
             .do(() => "correct result")
@@ -197,8 +184,7 @@ describe("Overload", () => {
     });
 
     it("return async result for typeof tests", () => {
-        return Overload
-            .when(Overload.NUMBER, Overload.STRING)
+        return Overload.when(Overload.NUMBER, Overload.STRING)
             .do(() => Promise.resolve("wrong result"))
             .when(Overload.STRING, Overload.NUMBER)
             .do(() => Promise.resolve("correct result"))
@@ -211,14 +197,13 @@ describe("Overload", () => {
     });
 
     it("return correct response when expected interface", () => {
-        let result = Overload
-            .when(
-                Overload.INTERFACE({
-                    propertyString: Overload.NUMBER,
-                    propertyNumber: Overload.NUMBER,
-                    propertyFunction: Overload.FUNCTION
-                })
-            )
+        let result = Overload.when(
+            Overload.INTERFACE({
+                propertyString: Overload.NUMBER,
+                propertyNumber: Overload.NUMBER,
+                propertyFunction: Overload.FUNCTION
+            })
+        )
             .do(() => "wrong result")
             .when(
                 Overload.INTERFACE({
@@ -237,14 +222,13 @@ describe("Overload", () => {
     });
 
     it("return correct response when expected interface with deep interface", () => {
-        let result = Overload
-            .when(
-                Overload.INTERFACE({
-                    propertyString: Overload.NUMBER,
-                    propertyNumber: Overload.NUMBER,
-                    propertyFunction: Overload.FUNCTION
-                })
-            )
+        let result = Overload.when(
+            Overload.INTERFACE({
+                propertyString: Overload.NUMBER,
+                propertyNumber: Overload.NUMBER,
+                propertyFunction: Overload.FUNCTION
+            })
+        )
             .do(() => "wrong result")
             .when(
                 Overload.INTERFACE({
