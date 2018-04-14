@@ -25,7 +25,7 @@ import Overload from "function-overloader";
 class Monster {
 
     constructor() {
-        Overload.set(...arguments)
+        Overload
             .when(Overload.STRING, Overload.NUMBER)
             .do((monsterName, level) => {
                 this.name = monsterName;
@@ -36,17 +36,17 @@ class Monster {
                 this.name = monsterData.name;
                 this.level = monsterData.level;
             })
-            .done();
+            .execute(...arguments);
         console.log(`Monster ${this.name} level ${this.level} created`);
     }
     
     addAttribute() {
-        return Overload.set(...arguments)
+        return Overload
             .when(Overload.INSTANCE(Attribute))
             .do(this.addExisitingAttribute)
             .when(Overload.STRING, Overload.FUNCTION)
             .do(this.addNewAttribute)
-            .done();
+            .execute(...arguments);
     }
     
     addExisitingAttribute (attribute) {
@@ -108,29 +108,16 @@ then:
  
 ```javascript
 function someOverloadedFunction() {
-    return Overload.set(...arguments)
+    return Overload
         .when(<list of types>)
         .do(someFunctionHandlingFirstCase)
         .when(<list of types>)
         .do(someFunctionHandlingSecondCase)  
-        .done();
+        .execute(...arguments);
 }
 ```
 
 ## API
-
-### init
-```javascript
-Overload.set(...arguments)
-```
-accept function arguments. It is possible by passing them one by one, but preffered why is to just pass spread `...arguments`.
-It will return `Condition Response`
-
-Another possibility is to :
-```javascript
-new Overload(...arguments);
-```
-And it will also return `Condition Response`
 
 ### .when()
 
@@ -185,14 +172,13 @@ Throws TypeError if not any above condition met
 
 Return object with `done` method.
 
-### .done()
+### .execute()
 
 ```javascript
-.done()
+.execute()
 ```
-should be called at the end to mark that now we should get chosen function response
- 
-No arguments. Will return funtion response
+accept function arguments. It is possible by passing them one by one, but preferred why is to just pass spread `...arguments`.
+Will return funtion response
 
 ### .do()
 
@@ -204,14 +190,6 @@ Is accessible only from object returned from `.when` method
 
 Accept callback function which should be called if previous `.when` match arguments.
 Will respond with `Condition Response`
-
-## Debugger
-
-For easy debug this library run your script with
-
-```
-DEBUG=Overloader <command to run>
-```
 
 ## License
 
