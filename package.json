@@ -59,7 +59,9 @@
     "webpack": "^3.0.0",
     "webpack2-externals-plugin": "^1.0.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "check-complex-types": "^1.8.3"
+  },
   "lint-staged": {
     "*.js": [
       "prettier --config .prettierrc --write",
