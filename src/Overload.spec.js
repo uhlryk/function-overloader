@@ -34,7 +34,7 @@ describe("Overload", () => {
     it("ensure that 'elseThrow' method return only object with 'execute' method", () => {
         let elseMethodResult = Overload.when()
             .do(() => {})
-            .else(() => {});
+            .elseThrow(() => {});
         expect(elseMethodResult).to.have.property("execute");
         expect(elseMethodResult).to.not.have.property("when");
         expect(elseMethodResult).to.not.have.property("else");
@@ -166,6 +166,19 @@ describe("Overload", () => {
                 .elseThrow()
                 .execute(10, 10);
         }).to.throw(TypeError);
+    });
+
+    it("should not throw type error when no conditions met", () => {
+        expect(() => {
+            Overload.when(Overload.NUMBER, Overload.STRING)
+                .do(() => "wrong result")
+                .when()
+                .do(() => "wrong result")
+                .when(Overload.NUMBER, Overload.NUMBER)
+                .do(() => "correct result")
+                .elseThrow()
+                .execute(10, 10);
+        }).to.not.throw(TypeError);
     });
 
     it("return sync result for classes", () => {

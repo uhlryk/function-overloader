@@ -72,6 +72,7 @@ function joinNameAndAge() {
        .do((name, age) => name + age)
        .when(Overlod.Number, Overload.String)
        .do((age, name) => name + age)
+       .execute(...arguments);
 }
 
 joinNameAndAge({
@@ -108,7 +109,6 @@ Is accessible only from object returned from `.when` method
 ```
 
 Accept callback function which should be called if previous `.when` match arguments.
-Will respond with `Condition Response`
 
 ### .else()
 
@@ -117,8 +117,6 @@ Will respond with `Condition Response`
 ```
 Accept callback function. Will invoke it when other criteria are not met.
 
-Return object with `done` method.
-
 ### .elseThrow()
 
 ```javascript
@@ -126,16 +124,12 @@ Return object with `done` method.
 ```
 Throws TypeError if not any above condition met
 
-Return object with `done` method.
-
 ### .execute()
 
 ```javascript
 .execute()
 ```
 accept function arguments. It is possible by passing them one by one, but preferred why is to just pass spread `...arguments`.
-Will return funtion response
-
 
 ## License
 
